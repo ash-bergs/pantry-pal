@@ -1,15 +1,18 @@
 :root {
   --main-bg-color: lavendarblush;
-  --nav-bg-color: #76bed0;
+  --nav-bg-color: #33a7ff;
+  --background-blue-alternate: rgba(51, 167, 255, 0.5);
   --nav-text-color: #fff;
   --text-color: #364958;
+  --text-shadow-large: 2px 4px 3px rgba(0, 0, 0, 0.3);
   --border-color: #bfbfbf;
   --item-bg-color: #eaeaea;
-  --button-bg-color: #76bed0;
+  --button-bg-color: #35ce8d;
   --button-text-color: #fff;
   --button-hover-bg-color: #fb3640;
   --button-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  --heading-font-family: 'Urbanist', sans-serif;
 }
 
 html {
@@ -25,9 +28,51 @@ html {
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 
 body {
   background-color: var(--main-bg-color);
+  font-family: sans-serif;
 }
+
+.stickyPriceFooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000; /* Ensures it stays on top of other content */
+  padding: 10px; /* Add some padding for better appearance */
+}
+
+/* rendered in a flex - showItemsControl */
+.arrow-up {
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--nav-bg-color);
+  border-left: 0;
+  border-top: 0;
+  transform: rotate(225deg);
+  align-self: center;
+  margin-top: 0.2rem;
+}
+
+.arrow-down {
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--nav-bg-color);
+  border-left: 0;
+  border-top: 0;
+
+  transform: rotate(45deg);
+}
+
+/* .arrow-up {
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--nav-bg-color);
+  border-left: 0;
+  border-top: 0;
+  transform: rotate(225deg);
+  align-self: center;
+  margin-top: 0.2rem;
+} */

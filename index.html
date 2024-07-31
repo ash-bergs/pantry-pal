@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="./styles/form.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/items.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <script src="./dexie.min.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
@@ -25,10 +31,16 @@
     </nav>
     <div class="container">
       <!-- ADD ITEM FORM -->
-      <form id="itemForm">
+      <form id="itemForm" novalidate>
         <label>
-          Name of Item
-          <input type="text" id="nameInput" required />
+          Item
+          <input
+            type="text"
+            id="nameInput"
+            placeholder="Grocery Item"
+            required
+          />
+          <span class="error" id="nameError"></span>
         </label>
 
         <label>
@@ -38,7 +50,13 @@
 
         <label>
           Price
-          <input type="text" id="priceInput" />
+          <input
+            type="text"
+            id="priceInput"
+            placeholder="1.99"
+            pattern="^\d+(\.\d{1,2})?$"
+          />
+          <span class="error" id="priceError"></span>
         </label>
         <div class="formActionsDiv">
           <button type="submit" id="addItemButton">Add Item</button>
@@ -46,13 +64,43 @@
         </div>
       </form>
     </div>
+
     <!-- SHOPPING ITEMS LIST -->
     <div id="itemsDiv"></div>
     <!-- TOTAL PRICE OF LIST -->
-    <div class="divider"></div>
-    <div id="totalPriceDiv">
-      <p>Estimated Total Price</p>
-      <p id="priceAmount"></p>
+    <div class="stickyPriceFooter">
+      <!-- ITEMS CONTROLS -->
+      <div id="itemsControl" class="itemsControl">
+        <div class="itemsControlButtons">
+          <!-- TODO: Reset and Delete buttons -->
+          <!-- <button id="resetChecked">Reset Checked</button>
+          <button id="deleteChecked">Delete Checked</button> -->
+        </div>
+        <div class="filters">
+          <label>
+            Auto Sort
+            <input type="checkbox" id="autoSort" class="checkbox" />
+          </label>
+          <label>
+            Hide Checked
+            <input type="checkbox" id="autoSort" class="checkbox" />
+          </label>
+          <!-- TODO: Sort by Section -->
+          <!-- <label>
+            Sort by Section
+            <input type="checkbox" id="sectionSort" class="checkbox" />
+          </label> -->
+        </div>
+      </div>
+      <div id="showItemsControl" class="showItemsControl">
+        <p id="toggleMessage">Hide Filters</p>
+        <div id="arrow" class="arrow-down"></div>
+      </div>
+      <div class="divider"></div>
+      <div id="totalPriceDiv">
+        <p>Estimated Total Price</p>
+        <p id="priceAmount"></p>
+      </div>
     </div>
     <script src="./index.js"></script>
   </body>

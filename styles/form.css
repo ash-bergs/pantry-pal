@@ -25,6 +25,10 @@
   width: 100%;
 }
 
+#itemForm input:invalid {
+  outline: 1px solid var(--button-hover-bg-color);
+}
+
 #itemForm input:focus-visible {
   outline: 1px solid var(--nav-bg-color);
 }
@@ -32,4 +36,12 @@
 #quantityInput,
 #priceInput {
   width: 3rem;
+}
+
+.error {
+  font-size: 16px;
+  font-style: italic;
+  letter-spacing: 0.03rem;
+  line-height: 2rem;
+  color: var(--button-hover-bg-color);
 }
