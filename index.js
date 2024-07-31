@@ -15,8 +15,16 @@ const clearFormButton = document.getElementById('cancelButton');
 // fetch items from the database
 const populateItemsDiv = async () => {
   const allItems = await db.items.reverse().toArray();
+  const sortedItems = allItems
+    .map((item) => ({
+      ...item,
+      // add false - as this doesn't come back at all if not checked and set
+      isPurchased: item.isPurchased ?? false,
+    }))
+    // sort list to push checked items to the bottom of the list
+    .sort((a, b) => a.isPurchased - b.isPurchased);
 
-  itemsDiv.innerHTML = allItems
+  itemsDiv.innerHTML = sortedItems
     .map(
       (item) => `
       <div class="item ${item.isPurchased && 'purchased'}">
