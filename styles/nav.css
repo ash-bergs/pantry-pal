@@ -1,0 +1,11 @@
+nav {
+  background: var(--nav-bg-color);
+  letter-spacing: 0.1rem;
+  line-height: 3rem;
+  color: var(--nav-text-color);
+  padding-left: 2rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  font-size: 24px;
+  font-weight: 600;
+}

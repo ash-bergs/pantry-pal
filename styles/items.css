@@ -1,0 +1,118 @@
+#itemsDiv {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: min-content 2fr 1fr;
+  border-bottom: 1px solid #cdcccb;
+  background: var(--item-bg-color);
+  margin-bottom: 0.5rem;
+  font-size: 20px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.checkbox {
+  height: 100%;
+  width: 2rem;
+  margin-left: 0.5rem;
+}
+
+/* container for an item in the rendered shopping list */
+.itemInfo {
+  display: grid;
+  grid-template-areas:
+    'name name'
+    'quantity price';
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr min-content;
+  gap: 0.7rem;
+  padding-left: 1rem;
+  color: var(--text-color);
+  padding-top: 0.5rem;
+  padding-bottom: 0.2rem;
+}
+
+.itemInfo > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.itemInfoHeading {
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.05rem;
+}
+
+.itemNameContainer {
+  grid-area: name;
+  font-size: 22px;
+}
+
+.itemNameText {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.itemQuantityContainer {
+  grid-area: quantity;
+}
+
+.itemQuantityText {
+  font-weight: 600;
+}
+
+.itemPriceContainer {
+  grid-area: price;
+}
+
+.itemPriceText {
+  font-size: 16px;
+}
+
+.deleteButton {
+  margin: 0 0 0 auto;
+  background: var(--button-hover-bg-color);
+  color: var(--button-text-color);
+  font-size: 0.8rem;
+  width: 4rem;
+  border-radius: 0px;
+}
+
+.deleteButton:active {
+  margin-top: 3px;
+}
+
+.purchased {
+  background: #878e88;
+  color: #fff;
+}
+
+.purchased .itemNameText {
+  text-decoration: line-through;
+}
+
+.divider {
+  border-top: 1px solid var(--nav-bg-color);
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+#totalPriceDiv {
+  margin: 2rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  align-items: center;
+  color: var(--text-color);
+}
+
+#priceAmount {
+  background: #cdcccb;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 20px;
+}
