@@ -1,0 +1,35 @@
+.container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color: var(--text-color);
+}
+
+#itemForm {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+#itemForm label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+#itemForm input {
+  display: block;
+  height: 2.5rem;
+  font-size: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+#itemForm input:focus-visible {
+  outline: 1px solid var(--nav-bg-color);
+}
+
+#quantityInput,
+#priceInput {
+  width: 3rem;
+}

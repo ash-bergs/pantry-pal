@@ -9,7 +9,8 @@ db.version(1).stores({
 // get the UI elements we need
 const itemForm = document.getElementById('itemForm');
 const itemsDiv = document.getElementById('itemsDiv');
-const totalPriceDiv = document.getElementById('totalPriceDiv');
+const priceAmount = document.getElementById('priceAmount');
+const clearFormButton = document.getElementById('cancelButton');
 
 // fetch items from the database
 const populateItemsDiv = async () => {
@@ -30,8 +31,18 @@ const populateItemsDiv = async () => {
         
 
         <div class="itemInfo">
-          <p>${item.name}</p>
-          <p>$${item.price} X ${item.quantity}</p>
+          <div class="itemNameContainer">
+            <p class="itemInfoHeading">Item</p>
+            <p class="itemNameText">${item.name}</p>
+          </div>
+          <div class="itemQuantityContainer">
+            <p class="itemInfoHeading">Quantity</p>
+            <p class="itemQuantityText">${item.quantity}</p>
+          </div>
+          <div class="itemPriceContainer">
+            <p class="itemInfoHeading">Price</p>
+            <p class="itemPriceText">$${item.price} </p>
+          </div>
         </div>
 
         <button
@@ -49,11 +60,20 @@ const populateItemsDiv = async () => {
   const priceList = allItems.map((item) => item.price * item.quantity);
   const totalPrice = priceList.reduce((a, b) => a + b, 0);
 
-  totalPriceDiv.innerText = 'Total Price: $' + totalPrice;
+  priceAmount.innerText = '$' + totalPrice.toFixed(2);
 };
 
 // call populate to load shopping list items
 window.onload = populateItemsDiv;
+
+// add function to clear form button
+const clearForm = () => {
+  itemForm.reset();
+  document.getElementById('nameInput').focus(); // return focus to the top form input
+};
+
+// bind clear form button to action
+clearFormButton.addEventListener('click', clearForm);
 
 // Form submit
 itemForm.onsubmit = async (event) => {
@@ -68,6 +88,7 @@ itemForm.onsubmit = async (event) => {
   await populateItemsDiv();
 
   itemForm.reset();
+  document.getElementById('nameInput').focus(); // return focus to the top form input
 };
 
 const toggleItemPurchaseStatus = async (event, id) => {

@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Shopping App</title>
+    <title>Pantry Pal</title>
     <link rel="stylesheet" href="./assets/favicon.png" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/nav.css" />
+    <link rel="stylesheet" href="./styles/form.css" />
+    <link rel="stylesheet" href="./styles/buttons.css" />
+    <link rel="stylesheet" href="./styles/items.css" />
     <script src="./dexie.min.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
@@ -17,32 +21,39 @@
   </head>
   <body>
     <nav>
-      <p>My List</p>
+      <p>Pantry Pal</p>
     </nav>
     <div class="container">
       <!-- ADD ITEM FORM -->
       <form id="itemForm">
-        <label for="">
+        <label>
           Name of Item
           <input type="text" id="nameInput" required />
         </label>
 
-        <label for="">
+        <label>
           Quantity
           <input type="number" id="quantityInput" value="1" />
         </label>
 
-        <label for="">
+        <label>
           Price
           <input type="text" id="priceInput" />
         </label>
-        <button type="submit" id="addItemButton">Add Item</button>
+        <div class="formActionsDiv">
+          <button type="submit" id="addItemButton">Add Item</button>
+          <button id="cancelButton">Cancel</button>
+        </div>
       </form>
     </div>
     <!-- SHOPPING ITEMS LIST -->
     <div id="itemsDiv"></div>
     <!-- TOTAL PRICE OF LIST -->
-    <div id="totalPriceDiv"></div>
+    <div class="divider"></div>
+    <div id="totalPriceDiv">
+      <p>Estimated Total Price</p>
+      <p id="priceAmount"></p>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>
