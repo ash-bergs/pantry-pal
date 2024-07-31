@@ -2,7 +2,7 @@
 
 ### Version 1.0
 
-![alt text](./assets/version-1-screenshot.png)
+<img src="./assets/version-1-screenshot.png" alt="mobile screenshot" style="width: 200px; height: auto;">
 
 While building apps with React, Vue, Angular or other libraries is often the go-to move - these libraries, and the frameworks available to them, abstract away the fundamentals. I built Pantry Pal as a way to get back in tough with the OGs:
 
