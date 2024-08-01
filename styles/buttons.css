@@ -21,8 +21,19 @@ button:active {
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
-#addItemButton,
 #openModalButton {
+  background: var(--nav-bg-color);
+  font-family: var(--heading-font-family);
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  #openModalButton {
+    width: 100%;
+  }
+}
+
+#addItemButton {
   background: var(--button-bg-color);
   font-family: var(--heading-font-family);
 }

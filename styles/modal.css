@@ -12,12 +12,17 @@
 
 .modal-content {
   background-color: #fefefe;
-  margin: 25% auto;
-  /* 25% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 90%;
   border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    margin: 25% auto;
+  }
 }
 
 .close {
@@ -48,9 +53,16 @@
 .container {
   padding-top: 2rem;
   padding-bottom: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
   margin-top: 4rem; /* Gives space so the items in the main screen aren't behind the nav */
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 #modalTitle {
