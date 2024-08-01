@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./assets/favicon.png" />
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/nav.css" />
+    <link rel="stylesheet" href="./styles/modal.css" />
     <link rel="stylesheet" href="./styles/form.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/items.css" />
@@ -30,51 +31,52 @@
       <p>Pantry Pal</p>
     </nav>
     <div class="container">
-      <!-- ADD ITEM FORM -->
-      <form id="itemForm" novalidate>
-        <label>
-          Item
-          <input
-            type="text"
-            id="nameInput"
-            placeholder="Grocery Item"
-            required
-          />
-          <span class="error" id="nameError"></span>
-        </label>
+        <!-- MODAL TRIGGER -->
+      <button id="openModalButton" aria-haspopup="dialog" aria-controls="modal">Add New Item</button>
 
-        <label>
-          Quantity
-          <input type="number" id="quantityInput" value="1" />
-        </label>
+      <!-- MODAL STRUCTURE -->
+      <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-content">
+          <button id="closeModal" class="close" aria-label="Close">&times;</button>
+          <h2 id="modalTitle">Add New Item</h2>
+          <form id="itemForm" novalidate>
+            <label for="nameInput">
+              Item
+              <input
+                type="text"
+                id="nameInput"
+                placeholder="Grocery Item"
+                aria-describedby="nameError"
+                required
+              />
+              <span class="error" id="nameError"></span>
+            </label>
 
-        <!-- TODO: This needs to be dropdown select input -->
-        <!-- <label>
-          Unit
-          <input type="number" id="unitInput" value="1" />
-        </label> -->
+            <label for="quantityInput">
+              Quantity
+              <input type="number" id="quantityInput" value="1" />
+            </label>
 
-        <label>
-          Price
-          <input
-            type="text"
-            id="priceInput"
-            placeholder="1.99"
-            pattern="^\d+(\.\d{1,2})?$"
-          />
-          <span class="error" id="priceError"></span>
-        </label>
+            <label for="priceInput">
+              Price
+              <input
+                type="text"
+                id="priceInput"
+                placeholder="1.99"
+                pattern="^\d+(\.\d{1,2})?$"
+                aria-describedby="priceError"
+              />
+              <span class="error" id="priceError"></span>
+            </label>
 
-        <!-- TODO: This needs to be dropdown select input -->
-        <!-- <label>
-          Store Section
-          <input type="number" id="sectionInput" value="1" />
-        </label> -->
-        <div class="formActionsDiv">
-          <button type="submit" id="addItemButton">Add Item</button>
-          <button id="cancelButton">Cancel</button>
+            <div class="formActionsDiv">
+              <button type="submit" id="addItemButton">Add Item</button>
+              <button id="cancelButton" type="button">Cancel</button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+    </div>
     </div>
 
     <!-- SHOPPING ITEMS LIST -->

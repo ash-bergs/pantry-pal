@@ -1,6 +1,5 @@
 #itemsDiv {
-  margin-top: 3rem;
-  margin-bottom: 20rem;
+  margin-bottom: 20rem; /* spacing so items dont get lost under sticky footer*/
 }
 
 .item {
@@ -98,7 +97,7 @@
 
 .divider {
   border-top: 1px solid var(--nav-bg-color);
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   margin-left: 2rem;
   margin-right: 2rem;
 }
@@ -128,7 +127,6 @@
 
 .itemsControl {
   padding: 1rem;
-  margin-bottom: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: var(--background-blue-alternate);
@@ -182,6 +180,8 @@
 }
 
 .showItemsControl {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
