@@ -1,0 +1,61 @@
+import { itemsDiv, priceAmount } from './domElements.js';
+import db from './db.js';
+
+// fetch items from the database
+export const populateItems = async () => {
+  const allItems = await db.items.reverse().toArray();
+  const sortedItems = allItems
+    .map((item) => ({
+      ...item,
+      // add false - as this doesn't come back at all if not checked and set
+      isPurchased: item.isPurchased ?? false,
+    }))
+    // sort list to push checked items to the bottom of the list
+    .sort((a, b) => a.isPurchased - b.isPurchased);
+
+  itemsDiv.innerHTML = sortedItems
+    .map(
+      (item) => `
+      <div class="item ${item.isPurchased && 'purchased'}" id="item-${item.id}">
+        
+          <input
+           type="checkbox" 
+           id="checkbox" 
+           class="checkbox" 
+           onchange="toggleItemPurchaseStatus(event, ${item.id})"
+           ${item.isPurchased && 'checked'}
+           />
+        
+
+        <div class="itemInfo">
+          <div class="itemNameContainer">
+            <p class="itemInfoHeading">Item</p>
+            <p class="itemNameText">${item.name}</p>
+          </div>
+          <div class="itemQuantityContainer">
+            <p class="itemInfoHeading">Quantity</p>
+            <p class="itemQuantityText">${item.quantity}</p>
+          </div>
+          <div class="itemPriceContainer">
+            <p class="itemInfoHeading">Est. Price</p>
+            <p class="itemPriceText">$${item.price} </p>
+          </div>
+        </div>
+
+        <button
+        onclick="removeItem(${item.id})"
+        class="deleteButton"
+        >
+        X
+        </button>
+      </div>
+    `
+    )
+    .join('');
+
+  // calculate the prices of each item with quantity multiplier
+  const priceList = allItems.map((item) => item.price * item.quantity);
+  const totalPrice = priceList.reduce((a, b) => a + b, 0);
+
+  priceAmount.innerText = '$' + totalPrice.toFixed(2);
+};
