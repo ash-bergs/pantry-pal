@@ -21,35 +21,42 @@ export const populateItems = async () => {
   itemsDiv.innerHTML = sortedItems
     .map(
       (item) => `
-      <div class="item ${item.isPurchased && 'purchased'}" id="item-${item.id}">
+      <div class="item ${item.isPurchased && 'purchased'}" id="item-${
+        item.id
+      }" role="listitem" aria-labelledby="item-name-${item.id}">
         
           <input
            type="checkbox" 
-           id="checkbox" 
+           id="checkbox-${item.id}"
            class="checkbox" 
            onchange="toggleItemPurchaseStatus(event, ${item.id})"
-           ${item.isPurchased && 'checked'}
+           ${item.isPurchased ? 'checked' : ''}
+           aria-labelledby="item-name-${item.id}"
            />
-        
 
         <div class="itemInfo">
           <div class="itemNameContainer">
             <p class="itemInfoHeading">Item</p>
-            <p class="itemNameText">${item.name}</p>
+            <p class="itemNameText" id="item-name-${item.id}">${item.name}</p>
           </div>
           <div class="itemQuantityContainer">
             <p class="itemInfoHeading">Quantity</p>
-            <p class="itemQuantityText">${item.quantity}</p>
+            <p class="itemQuantityText" id="item-quantity-${item.id}">${
+        item.quantity
+      }</p>
           </div>
           <div class="itemPriceContainer">
             <p class="itemInfoHeading">Est. Price</p>
-            <p class="itemPriceText">$${item.price} </p>
+            <p class="itemPriceText" id="item-price-${item.id}">$${
+        item.price
+      } </p>
           </div>
         </div>
 
         <button
         onclick="removeItem(${item.id})"
         class="deleteButton"
+        aria-label="Remove ${item.name}"
         >
         X
         </button>

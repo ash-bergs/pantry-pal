@@ -3,6 +3,7 @@
   display: flex;
   gap: 2rem;
   justify-content: center;
+  padding-top: 2rem;
 }
 
 button {
@@ -15,17 +16,29 @@ button {
   box-shadow: var(--button-shadow);
 }
 
+button:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+#openModalButton {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--nav-bg-color);
+  font-family: var(--heading-font-family);
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  #openModalButton {
+    width: 100%;
+  }
+}
+
 #addItemButton {
   background: var(--button-bg-color);
   font-family: var(--heading-font-family);
-}
-
-#addItemButton:active,
-#cancelButton:active,
-#deleteChecked:active,
-#resetChecked:active {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 #cancelButton {
