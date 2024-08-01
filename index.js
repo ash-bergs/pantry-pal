@@ -11,7 +11,7 @@ const closeModalButton = document.getElementById('closeModal');
 const focusableElements =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 const firstFocusableElement = modal.querySelectorAll(focusableElements)[0];
-const focusableContent = modal.querySelector(focusableElements);
+const focusableContent = modal.querySelectorAll(focusableElements);
 const lastFocusableElement = focusableContent[focusableContent.length - 1];
 
 // utility to set the modal inert
