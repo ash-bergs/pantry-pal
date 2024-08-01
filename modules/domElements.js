@@ -14,3 +14,6 @@ export const showItemsControlContainer =
 export const itemsControl = document.getElementById('itemsControl');
 export const toggleMessage = document.getElementById('toggleMessage');
 export const toggleArrow = document.getElementById('arrow');
+// filter options
+export const autoSort = document.getElementById('autoSort');
+export const hideChecked = document.getElementById('hideChecked');
