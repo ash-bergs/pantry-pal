@@ -22,6 +22,9 @@ button:active {
 }
 
 #openModalButton {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
   background: var(--nav-bg-color);
   font-family: var(--heading-font-family);
   width: auto;
