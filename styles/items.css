@@ -137,14 +137,18 @@
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.itemsControlInput {
+  font-size: 18px;
+  font-family: var(--heading-font-family);
+  color: var(--text-color);
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+}
+
 .itemsControl.toggled {
   display: none;
   height: 0;
-}
-
-.itemsControl > label {
-  font-size: 18px;
-  text-align: right;
 }
 
 .itemsControlButtons {
@@ -166,12 +170,10 @@
 .filters {
   display: flex;
   flex-direction: column;
-  align-content: center;
   align-items: end;
   gap: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  color: var(--text-color);
 }
 
 #deleteChecked {
