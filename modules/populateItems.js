@@ -1,17 +1,22 @@
-import { itemsDiv, priceAmount } from './domElements.js';
+import { autoSort, hideChecked, itemsDiv, priceAmount } from './domElements.js';
 import db from './db.js';
 
 // fetch items from the database
 export const populateItems = async () => {
   const allItems = await db.items.reverse().toArray();
-  const sortedItems = allItems
-    .map((item) => ({
-      ...item,
-      // add false - as this doesn't come back at all if not checked and set
-      isPurchased: item.isPurchased ?? false,
-    }))
-    // sort list to push checked items to the bottom of the list
-    .sort((a, b) => a.isPurchased - b.isPurchased);
+  let sortedItems = allItems.map((item) => ({
+    ...item,
+    // add false - as this doesn't come back at all if not checked and set
+    isPurchased: item.isPurchased ?? false,
+  }));
+
+  if (autoSort.checked) {
+    sortedItems = sortedItems.sort((a, b) => a.isPurchased - b.isPurchased);
+  }
+
+  if (hideChecked.checked) {
+    sortedItems = sortedItems.filter((item) => !item.isPurchased);
+  }
 
   itemsDiv.innerHTML = sortedItems
     .map(

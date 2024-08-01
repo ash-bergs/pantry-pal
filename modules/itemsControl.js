@@ -1,6 +1,13 @@
 // the light blue div above the price div and the elements within
 // houses filters/mass actions
-import { itemsControl, toggleMessage, toggleArrow } from './domElements.js';
+import {
+  autoSort,
+  itemsControl,
+  toggleMessage,
+  toggleArrow,
+  hideChecked,
+} from './domElements.js';
+import { populateItems } from './populateItems.js';
 
 let isItemsControlHidden = false;
 
@@ -21,6 +28,9 @@ export const toggleItemsControls = () => {
     toggleArrow.classList.add('arrow-down');
   }
 };
+
+autoSort.addEventListener('change', populateItems);
+hideChecked.addEventListener('change', populateItems);
 
 /* ---------------------------- NOTES ON SORTING ---------------------------- */
 /**
