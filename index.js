@@ -8,6 +8,11 @@ import {
 import { toggleItemsControls } from './modules/itemsControl.js';
 import { populateItems } from './modules/populateItems.js';
 import db from './modules/db.js';
+import { exportDb } from './modules/exportDb.js';
+
+// get download button and add action
+const downloadButton = document.getElementById('backupData');
+downloadButton.addEventListener('click', exportDb);
 
 // call populate to load shopping list items
 window.onload = populateItems;
