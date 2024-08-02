@@ -5,6 +5,7 @@
   --nav-text-color: #fff;
   --text-color: #364958;
   --text-shadow-large: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  --text-shadow-small: 1px 2px 2px rgba(0, 0, 0, 0.1);
   --border-color: #bfbfbf;
   --item-bg-color: #eaeaea;
   --button-bg-color: #35ce8d;
@@ -35,13 +36,29 @@ body {
   font-family: sans-serif;
 }
 
+/* container for the add button and modal structure */
+.container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
+  margin-top: 4rem; /* Gives space so the items in the main screen aren't behind the nav */
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
 .stickyPriceFooter {
   position: fixed;
   bottom: 0;
   width: 100%;
   background: white;
-  z-index: 1; /* Ensures it stays on top of other content */
-  padding: 10px; /* Add some padding for better appearance */
+  z-index: 1;
+  padding: 10px;
 }
 
 /* ICONS */

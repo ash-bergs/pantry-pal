@@ -14,6 +14,7 @@ button {
   font-size: 20px;
   font-weight: 600;
   box-shadow: var(--button-shadow);
+  font-family: var(--heading-font-family);
 }
 
 button:active {
@@ -30,6 +31,18 @@ button:active {
   width: auto;
 }
 
+#openOptionsModalButton {
+  background: #004385;
+  font-size: 16px;
+}
+
+.downloadDataButton {
+  width: 100%;
+  color: #fff;
+  background: #004385;
+  box-shadow: var(--button-shadow), #023568 0 -12px 6px inset;
+}
+
 @media (max-width: 600px) {
   #openModalButton {
     width: 100%;
@@ -38,10 +51,10 @@ button:active {
 
 #addItemButton {
   background: var(--button-bg-color);
-  font-family: var(--heading-font-family);
 }
 
-#cancelButton {
+#cancelButton,
+#closeOptionsModal {
+  color: #fff;
   background: var(--button-hover-bg-color);
-  font-family: var(--heading-font-family);
 }

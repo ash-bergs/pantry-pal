@@ -1,0 +1,60 @@
+.optionsModal {
+  height: 100%;
+  width: 0; /* TOGGLE SIZE IN JS */
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fefefe;
+  box-shadow: var(--button-shadow);
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s;
+}
+
+/* Might swap to a grid later */
+/* TODO: why aren't these checkboxes sizing right 🤔*/
+.filterInputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+}
+
+.filterInputs label {
+  font-size: 16px;
+}
+
+.optionsModalTitleContainer {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #fff;
+  background: #364958;
+  box-shadow: var(--button-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.optionsSettingsContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 2rem;
+}
+
+.optionsModalFooter {
+  padding: 1rem;
+}
+
+.optionsModalTitle {
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.12rem;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+}
