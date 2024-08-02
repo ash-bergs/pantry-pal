@@ -1,7 +1,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   top: 0;
   width: 100%;
@@ -47,22 +47,6 @@
 
 .inert {
   user-select: none;
-}
-
-/* container for the add button and modal structure */
-.container {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  padding-left: 6rem;
-  padding-right: 6rem;
-  margin-top: 4rem; /* Gives space so the items in the main screen aren't behind the nav */
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
 }
 
 #modalTitle {

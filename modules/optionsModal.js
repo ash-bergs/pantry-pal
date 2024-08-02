@@ -1,44 +1,37 @@
-import { itemForm } from './domElements.js';
+import { autoSort, hideChecked } from './domElements.js';
+import { populateItems } from './populateItems.js';
 
 // get modal and focusable elements
-export const modal = document.getElementById('modal');
-export const openModalButton = document.getElementById('openModalButton');
+export const modal = document.getElementById('optionsModal');
+// create openOptionsModalButton
+export const openModalButton = document.getElementById(
+  'openOptionsModalButton'
+);
 // define the types of focusable elements
 const focusableElements =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 export const firstFocusableElement =
   modal.querySelectorAll(focusableElements)[0];
 export const focusableContent = modal.querySelectorAll(focusableElements);
-
-export const closeModalButton = document.getElementById('closeModal');
+export const closeModalButton = document.getElementById('closeOptionsModal');
 export const lastFocusableElement =
   focusableContent[focusableContent.length - 1];
 
-// utility to set all elements BEHIND the modal non-interactive
-// inert is a css class in index.css
-export const setInert = (state) => {
-  document.querySelectorAll('body > *:not(.modal)').forEach((element) => {
-    element.classList.toggle('inert', state);
-  });
-};
-
 export const showModal = () => {
-  modal.style.display = 'block';
+  modal.style.width = '60%';
   modal.setAttribute('aria-hidden', 'false');
-  setInert(true);
   firstFocusableElement.focus();
 };
 
-export const hideAddFormModal = () => {
-  modal.style.display = 'none';
+export const hideOptionsModal = () => {
+  modal.style.width = 0;
   modal.setAttribute('aria-hidden', 'true');
-  setInert(false);
   openModalButton.focus();
-  itemForm.reset();
 };
 
 // Trap focus inside the modal
 modal.addEventListener('keydown', (event) => {
+  //TODO: keycode deprecated - investigate
   let isTabPressed = event.key === 'Tab' || event.keyCode === 9;
 
   if (!isTabPressed) {
@@ -64,4 +57,7 @@ modal.addEventListener('keydown', (event) => {
 // When the user clicks the button, open the modal
 openModalButton.addEventListener('click', showModal);
 // When the user clicks on <span> (x), close the modal
-closeModalButton.addEventListener('click', hideAddFormModal);
+closeModalButton.addEventListener('click', hideOptionsModal);
+
+autoSort.addEventListener('change', populateItems);
+hideChecked.addEventListener('change', populateItems);

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./styles/nav.css" />
     <link rel="stylesheet" href="./styles/modal.css" />
+    <link rel="stylesheet" href="./styles/optionsModal.css" />
     <link rel="stylesheet" href="./styles/form.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/items.css" />
@@ -28,7 +29,10 @@
   </head>
   <body>
     <nav>
-      <p>Pantry Pal</p>
+      <div class="navContents">
+        <p>Pantry Pal</p>
+        <button id="openOptionsModalButton">Settings</button>
+      </div>
     </nav>
     <div class="container">
         <!-- MODAL TRIGGER -->
@@ -36,10 +40,11 @@
         <div class="plus"></div>
         <p>Add New Item</p>
       </button>
-      <button id="backupData" class="backupData">Download Data</button>
+      
 
       <!-- MODAL STRUCTURE -->
-      <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+       <!-- ADD ITEM MODAL -->
+      <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true" aria-hidden="true">
         <div class="modal-content">
           <button id="closeModal" class="close" aria-label="Close">&times;</button>
           <h2 id="modalTitle">Add New Item</h2>
@@ -83,37 +88,36 @@
     </div>
     </div>
 
+    <!-- FILTERS AND OPTIONS SIDEBAR -->
+     <div id="optionsModal" class="optionsModal" role="dialog" aria-labelledby="optionsModalTitle" aria-modal="true" >
+       <div class="optionsSettingsContainer">
+        <div class="optionsModalTitleContainer">
+        <h2 class="optionsModalTitle">Settings</h2>
+        <button id="closeOptionsModal" class="close" aria-label="Close Settings Panel">&times;</button>
+        </div>
+       <div class="filterInputs">
+        <label class="itemsControlInput">
+          <input type="checkbox" id="autoSort" class="checkbox" />
+          Auto Sort
+          </label>
+          <label class="itemsControlInput">
+            <input type="checkbox" id="hideChecked" class="checkbox" />
+          Hide Checked
+          </label>
+       </div>
+
+       <div class="optionsModalFooter">
+       <button id="backupData" class="downloadDataButton">Download</button>
+       </div>
+       </div>
+     </div>
+
     <!-- SHOPPING ITEMS LIST -->
     <div id="itemsDiv"></div>
     <!-- TOTAL PRICE OF LIST -->
     <div class="stickyPriceFooter">
       <!-- ITEMS CONTROLS -->
       <div id="itemsControl" class="itemsControl">
-        <div class="itemsControlButtons">
-          <!-- TODO: Reset and Delete buttons -->
-          <!-- <button id="resetChecked">Reset Checked</button>
-          <button id="deleteChecked">Delete Checked</button> -->
-        </div>
-        <div class="filters">
-          <label class="itemsControlInput">
-            Auto Sort
-            <input type="checkbox" id="autoSort" class="checkbox" />
-          </label>
-          <label class="itemsControlInput">
-            Hide Checked
-            <input type="checkbox" id="hideChecked" class="checkbox" />
-          </label>
-          <!-- TODO: Sort by Section -->
-          <!-- <label>
-            Sort by Section
-            <input type="checkbox" id="sectionSort" class="checkbox" />
-          </label> -->
-        </div>
-      </div>
-      <div id="showItemsControl" class="showItemsControl">
-        <p id="toggleMessage">Hide Filters</p>
-        <div id="arrow" class="arrow-down"></div>
-      </div>
       <div class="divider"></div>
       <div id="totalPriceDiv">
         <p>Estimated Total Price</p>
@@ -125,8 +129,8 @@
     <script type="module" src="./modules/domElements.js"></script>
     <script type="module" src="./modules/populateItems.js"></script>
     <script type="module" src="./modules/modal.js"></script>
+    <script type="module" src="./modules/optionsModal.js"></script>
     <script type="module" src="./modules/form.js"></script>
-    <script type="module" src="./modules/itemsControl.js"></script>
     <script type="module" src="./modules/exportDb.js"></script>
   </body>
 </html>

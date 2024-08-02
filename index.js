@@ -1,11 +1,5 @@
-import { showItemsControlContainer } from './modules/domElements.js';
-import {
-  openModalButton,
-  showModal,
-  hideModal,
-  closeModalButton,
-} from './modules/modal.js';
-import { toggleItemsControls } from './modules/itemsControl.js';
+import { hideAddFormModal } from './modules/modal.js';
+import { hideOptionsModal } from './modules/optionsModal.js';
 import { populateItems } from './modules/populateItems.js';
 import db from './modules/db.js';
 import { exportDb } from './modules/exportDb.js';
@@ -18,27 +12,22 @@ downloadButton.addEventListener('click', exportDb);
 window.onload = populateItems;
 
 /* MODAL ACTIONS */
-// When the user clicks the button, open the modal
-openModalButton.addEventListener('click', showModal);
-
-// When the user clicks on <span> (x), close the modal
-closeModalButton.addEventListener('click', hideModal);
 
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener('click', (event) => {
+  // add options modal
   if (event.target === modal) {
-    hideModal();
+    hideAddFormModal();
   }
 });
 
 // When the user presses the Escape key, close the modal
 window.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    hideModal();
+    hideAddFormModal();
+    hideOptionsModal();
   }
 });
-// show filters/mass action area
-showItemsControlContainer.addEventListener('click', toggleItemsControls);
 
 /* LIST ITEM ACTIONS */
 const toggleItemPurchaseStatus = async (event, id) => {

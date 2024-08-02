@@ -4,6 +4,7 @@ nav {
   line-height: 3rem;
   color: var(--nav-text-color);
   padding-left: 2rem;
+  padding-right: 2rem;
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
   font-family: var(--heading-font-family);
@@ -14,4 +15,9 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
+}
+
+.navContents {
+  display: flex;
+  justify-content: space-between;
 }
