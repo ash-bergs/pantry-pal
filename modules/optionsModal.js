@@ -18,12 +18,14 @@ export const lastFocusableElement =
   focusableContent[focusableContent.length - 1];
 
 export const showModal = () => {
+  modal.classList.add('open');
   modal.style.width = '60%';
   modal.setAttribute('aria-hidden', 'false');
   firstFocusableElement.focus();
 };
 
 export const hideOptionsModal = () => {
+  modal.classList.remove('open');
   modal.style.width = 0;
   modal.setAttribute('aria-hidden', 'true');
   openModalButton.focus();

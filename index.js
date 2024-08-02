@@ -1,4 +1,4 @@
-import { hideAddFormModal } from './modules/modal.js';
+import { addModal, hideAddFormModal } from './modules/modal.js';
 import { hideOptionsModal } from './modules/optionsModal.js';
 import { populateItems } from './modules/populateItems.js';
 import db from './modules/db.js';
@@ -24,8 +24,13 @@ window.addEventListener('click', (event) => {
 // When the user presses the Escape key, close the modal
 window.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    hideAddFormModal();
-    hideOptionsModal();
+    // if the add item modal is open, close it and return focus to add new item button
+    if (addModal.classList.contains('open')) {
+      hideAddFormModal();
+    } else {
+      // otherwise we'll run fn to close the sidebar
+      hideOptionsModal();
+    }
   }
 });
 

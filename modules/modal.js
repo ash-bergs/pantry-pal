@@ -1,14 +1,14 @@
 import { itemForm } from './domElements.js';
 
 // get modal and focusable elements
-export const modal = document.getElementById('modal');
+export const addModal = document.getElementById('modal');
 export const openModalButton = document.getElementById('openModalButton');
 // define the types of focusable elements
 const focusableElements =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 export const firstFocusableElement =
-  modal.querySelectorAll(focusableElements)[0];
-export const focusableContent = modal.querySelectorAll(focusableElements);
+  addModal.querySelectorAll(focusableElements)[0];
+export const focusableContent = addModal.querySelectorAll(focusableElements);
 
 export const closeModalButton = document.getElementById('closeModal');
 export const lastFocusableElement =
@@ -23,22 +23,24 @@ export const setInert = (state) => {
 };
 
 export const showModal = () => {
-  modal.style.display = 'block';
-  modal.setAttribute('aria-hidden', 'false');
+  addModal.classList.add('open');
+  addModal.style.display = 'block';
+  addModal.setAttribute('aria-hidden', 'false');
   setInert(true);
   firstFocusableElement.focus();
 };
 
 export const hideAddFormModal = () => {
-  modal.style.display = 'none';
-  modal.setAttribute('aria-hidden', 'true');
+  addModal.classList.remove('open');
+  addModal.style.display = 'none';
+  addModal.setAttribute('aria-hidden', 'true');
   setInert(false);
   openModalButton.focus();
   itemForm.reset();
 };
 
 // Trap focus inside the modal
-modal.addEventListener('keydown', (event) => {
+addModal.addEventListener('keydown', (event) => {
   let isTabPressed = event.key === 'Tab' || event.keyCode === 9;
 
   if (!isTabPressed) {
