@@ -17,6 +17,18 @@ export const populateItems = async () => {
   if (hideChecked.checked) {
     sortedItems = sortedItems.filter((item) => !item.isPurchased);
   }
+  // console.log('sorted items', sortedItems);
+  if (!sortedItems.length) {
+    console.log('HIT');
+    itemsDiv.innerHTML = `
+    <div class="noItemsMessage">
+      <p>There are no items in the list</p>
+      <p>Click "Add New" above to get started!</p>
+    </div>
+    `;
+    priceAmount.innerText = '$0.00';
+    return;
+  }
 
   itemsDiv.innerHTML = sortedItems
     .map(
