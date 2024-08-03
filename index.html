@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/nav.css" />
     <link rel="stylesheet" href="./styles/modal.css" />
     <link rel="stylesheet" href="./styles/optionsModal.css" />
+    <link rel="stylesheet" href="./styles/switch.css" />
     <link rel="stylesheet" href="./styles/form.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/items.css" />
@@ -39,7 +40,7 @@
         <!-- MODAL TRIGGER -->
       <button id="openModalButton" aria-haspopup="dialog" aria-controls="modal">
         <div class="plus"></div>
-        <p>Add New Item</p>
+        <p>Add New</p>
       </button>
       
 
@@ -91,21 +92,39 @@
 
     <!-- FILTERS AND OPTIONS SIDEBAR -->
      <div id="optionsModal" class="optionsModal" role="dialog" aria-labelledby="optionsModalTitle" aria-modal="true" >
-       <div class="optionsSettingsContainer">
+       
+      <div class="optionsSettingsContainer">
         <div class="optionsModalTitleContainer">
         <h2 class="optionsModalTitle">Settings</h2>
         <button id="closeOptionsModal" class="close" aria-label="Close Settings Panel">&times;</button>
         </div>
-       <div class="filterInputs">
-        <label class="itemsControlInput">
-          <input type="checkbox" id="autoSort" class="checkbox" />
+      
+    
+      <div class="filterInputs">
+      
+      <div class="filterControl">
+        <p class="controlText">
           Auto Sort
-          </label>
-          <label class="itemsControlInput">
-            <input type="checkbox" id="hideChecked" class="checkbox" />
+        </p>
+        <label class="switch">
+          <input id="autoSort" type="checkbox" class="switch-input">
+          <span class="switch-label" data-on="On" data-off="Off"></span>
+          <span class="switch-handle"></span>
+        </label>
+      </div>
+
+      <div class="filterControl">
+        <p class="controlText">
           Hide Checked
-          </label>
-       </div>
+        </p>
+        <label class="switch">
+          <input id="hideChecked" type="checkbox" class="switch-input">
+          <span class="switch-label" data-on="On" data-off="Off"></span>
+          <span class="switch-handle"></span>
+        </label>
+      </div>
+       
+      </div>
 
        <div class="optionsModalFooter">
        <button id="backupData" class="downloadDataButton">Download</button>
