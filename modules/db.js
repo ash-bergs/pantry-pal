@@ -18,22 +18,7 @@ db.version(2).stores({
     '++id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
 });
 
-// These work - https://dexie.org/docs/Table/Table.hook('creating')
-// but we have another option available to us (see below)
-// dexie hooks to handle creation and update
-// db.items.hook('creating', (primKey, obj, trans) => {
-//   obj.createdAt = new Date().toISOString();
-//   obj.updatedAt = obj.createdAt;
-// });
-
-// db.items.hook('updating', (modifications, primKey, obj, trans) => {
-//   modifications.updatedAt = new Date().toISOString();
-//   return modifications;
-// });
-
-// set created and updated at times automatically based on triggers:
-
-// we have another option outside of the hooks available to us: https://dexie.org/docs/DBCore/DBCore
+// https://dexie.org/docs/DBCore/DBCore
 // define dbcore middleware
 const timestampsMiddleware = {
   stack: 'dbcore',
@@ -64,7 +49,7 @@ const timestampsMiddleware = {
                 });
               }
             }
-
+            // return the modified db core instance
             return downlevelTable.mutate(req);
           },
         };
