@@ -55,7 +55,7 @@ export const populateItems = async () => {
             <p class="itemInfoHeading">Quantity</p>
             <p class="itemQuantityText" id="item-quantity-${item.id}">${
         item.quantity
-      }</p>
+      } ${item.quantityUnit}</p>
           </div>
           <div class="itemPriceContainer">
             <p class="itemInfoHeading">Est. Price</p>

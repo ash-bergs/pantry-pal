@@ -19,7 +19,8 @@ db.version(2).stores({
 });
 
 // https://dexie.org/docs/DBCore/DBCore
-// define dbcore middleware
+// when uploading backed up data, we'll need to figure out how to skip the actions in here, since we'll already have created and updated at
+// define dbcore middleware - if this grows a lot, we should add a middleware module
 const timestampsMiddleware = {
   stack: 'dbcore',
   name: 'timestampsMiddleware',
