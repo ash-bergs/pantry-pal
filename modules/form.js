@@ -50,6 +50,9 @@ itemForm.onsubmit = async (event) => {
   const quantity = document.getElementById('quantityInput').value;
   const price = document.getElementById('priceInput').value;
 
+  // now we need to add section (store section), quantityUnit
+  // and createdAt, updatedAt - can these be handled with dexie? Defaults?
+
   await db.items.add({ name, quantity, price });
   // refresh items div
   await populateItems();
