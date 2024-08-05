@@ -48,21 +48,27 @@ export const populateItems = async () => {
 
         <div class="itemInfo">
           <div class="itemNameContainer">
-            <p class="itemInfoHeading">Item</p>
-            <p class="itemNameText" id="item-name-${item.id}">${item.name}</p>
+            <div>
+              <p class="itemInfoHeading">Item</p>
+              <p class="itemNameText" id="item-name-${item.id}">${item.name}</p>
+            </div>
+            <p class="itemInfoHeading storeSection">${item.section}</p>
           </div>
+
           <div class="itemQuantityContainer">
             <p class="itemInfoHeading">Quantity</p>
             <p class="itemQuantityText" id="item-quantity-${item.id}">${
         item.quantity
       } ${item.quantityUnit}</p>
           </div>
+
           <div class="itemPriceContainer">
             <p class="itemInfoHeading">Est. Price</p>
-            <p class="itemPriceText" id="item-price-${item.id}">$${
+            <p class="itemPriceText" id="item-price-${item.id}">$ ${Number(
         item.price
-      } </p>
+      ).toFixed(2)} </p>
           </div>
+
         </div>
 
         <button
