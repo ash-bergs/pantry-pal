@@ -9,7 +9,8 @@
   font-size: 20px;
 }
 
-#itemForm input {
+#itemForm input,
+select {
   display: block;
   height: 2.5rem;
   font-size: 20px;
@@ -19,11 +20,21 @@
   width: 100%;
 }
 
+.formInputGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
 #itemForm input:invalid {
   outline: 1px solid var(--button-hover-bg-color);
 }
 
 #itemForm input:focus-visible {
+  outline: 1px solid var(--nav-bg-color);
+}
+
+#itemForm select:focus-visible {
   outline: 1px solid var(--nav-bg-color);
 }
 

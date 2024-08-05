@@ -5,8 +5,15 @@ import {
   nameError,
   priceInput,
   priceError,
+  quantityUnitSelect,
+  sectionSelect,
 } from './domElements.js';
 import { populateItems } from './populateItems.js';
+import {
+  storeSectionOptions,
+  quantityUnitsOptions,
+  createOptions,
+} from './optionsData.js';
 import db from './db.js';
 
 export const clearForm = () => {
@@ -25,6 +32,16 @@ export const clearPriceErrors = () => {
   priceInput.setCustomValidity('');
   priceError.textContent = '';
 };
+
+// generate the options in section and quantity unit selects
+document.addEventListener('DOMContentLoaded', () => {
+  if (quantityUnitSelect) {
+    quantityUnitSelect.innerHTML = createOptions(quantityUnitsOptions);
+  }
+  if (sectionSelect) {
+    sectionSelect.innerHTML = createOptions(storeSectionOptions);
+  }
+});
 
 // Form submit
 itemForm.onsubmit = async (event) => {
@@ -46,11 +63,13 @@ itemForm.onsubmit = async (event) => {
 
   if (!valid) return;
 
-  const name = document.getElementById('nameInput').value;
+  const name = nameInput.value;
   const quantity = document.getElementById('quantityInput').value;
-  const price = document.getElementById('priceInput').value;
+  const quantityUnit = quantityUnitSelect.value;
+  const price = priceInput.value;
+  const section = sectionSelect.value;
 
-  await db.items.add({ name, quantity, price });
+  await db.items.add({ name, quantity, quantityUnit, price, section });
   // refresh items div
   await populateItems();
 

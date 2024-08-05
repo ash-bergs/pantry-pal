@@ -63,21 +63,38 @@
               <span class="error" id="nameError"></span>
             </label>
 
+            <div class="formInputGroup">
             <label for="quantityInput">
               Quantity
               <input type="number" id="quantityInput" value="1" />
             </label>
 
+            <label for="quantityUnitInput">
+              Unit 
+              <select name="quantityUnitInput" id="quantityUnitInput">
+                <!-- GENERATED IN FORM.JS AND OPTIONSDATA.JS -->
+              </select>
+            </label>
+            </div>
+
             <label for="priceInput">
               Price
               <input
-                type="text"
                 id="priceInput"
+                type="number"
                 placeholder="1.99"
-                pattern="^\d+(\.\d{1,2})?$"
+                step="0.01"
+                min="0"
                 aria-describedby="priceError"
               />
               <span class="error" id="priceError"></span>
+            </label>
+
+            <label for="sectionInput">
+              Store Section
+              <select name="sectionInput" id="sectionInput">
+                <!-- GENERATED IN FORM.JS AND OPTIONSDATA.JS -->
+              </select>
             </label>
 
             <div class="formActionsDiv">
@@ -123,6 +140,17 @@
           <span class="switch-handle"></span>
         </label>
       </div>
+
+      <div class="filterControl">
+        <p class="controlText">
+          Sort by Section
+        </p>
+        <label class="switch">
+          <input id="sectionSort" type="checkbox" class="switch-input">
+          <span class="switch-label" data-on="On" data-off="Off"></span>
+          <span class="switch-handle"></span>
+        </label>
+      </div>
        
       </div>
 
@@ -150,6 +178,7 @@
     <script type="module" src="./modules/populateItems.js"></script>
     <script type="module" src="./modules/modal.js"></script>
     <script type="module" src="./modules/optionsModal.js"></script>
+    <script type="module" src="./modules/optionsData.js"></script>
     <script type="module" src="./modules/form.js"></script>
     <script type="module" src="./modules/exportDb.js"></script>
   </body>

@@ -45,21 +45,21 @@
   padding-bottom: 0.2rem;
 }
 
-.itemInfo > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .itemInfoHeading {
   font-size: 14px;
   font-style: italic;
   letter-spacing: 0.05rem;
 }
 
+.storeSection {
+  text-align: right;
+}
+
 .itemNameContainer {
   grid-area: name;
   font-size: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .itemNameText {
@@ -74,6 +74,7 @@
 
 .itemQuantityText {
   font-weight: 600;
+  font-size: 18px;
 }
 
 .itemPriceContainer {

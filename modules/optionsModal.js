@@ -1,4 +1,4 @@
-import { autoSort, hideChecked } from './domElements.js';
+import { autoSort, hideChecked, sectionSort } from './domElements.js';
 import { populateItems } from './populateItems.js';
 
 // get modal and focusable elements
@@ -63,3 +63,4 @@ closeModalButton.addEventListener('click', hideOptionsModal);
 
 autoSort.addEventListener('change', populateItems);
 hideChecked.addEventListener('change', populateItems);
+sectionSort.addEventListener('change', populateItems);

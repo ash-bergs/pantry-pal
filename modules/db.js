@@ -13,9 +13,53 @@ db.version(1).stores({
 // enum - pounds, ounces, units, box
 // createdAt - date
 // updatedAt - date
-// db.version(2).stores({
-//   items:
-//     '++id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
-// });
+db.version(2).stores({
+  items:
+    '++id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
+});
+
+// https://dexie.org/docs/DBCore/DBCore
+// when uploading backed up data, we'll need to figure out how to skip the actions in here, since we'll already have created and updated at
+// define dbcore middleware - if this grows a lot, we should add a middleware module
+const timestampsMiddleware = {
+  stack: 'dbcore',
+  name: 'timestampsMiddleware',
+  create: (downlevelDBCore) => {
+    return {
+      ...downlevelDBCore,
+      table: (tableName) => {
+        // retrieve the db table based on name
+        const downlevelTable = downlevelDBCore.table(tableName);
+
+        return {
+          ...downlevelTable,
+          // when mutating, determine if create/update
+          mutate: async (req) => {
+            if (tableName === 'items') {
+              const now = new Date().toISOString();
+
+              if (req.type === 'add') {
+                req.values.forEach((item) => {
+                  item.createdAt = now;
+                  item.updatedAt = now;
+                });
+              } else if (req.type === 'put') {
+                // only update the updatedAt on put req
+                req.values.forEach((item) => {
+                  item.updatedAt = now;
+                });
+              }
+            }
+            // return the modified db core instance
+            return downlevelTable.mutate(req);
+          },
+        };
+      },
+    };
+  },
+};
+
+// use our timestamp middlware
+db.use(timestampsMiddleware);
 
 export default db;
