@@ -28,13 +28,13 @@ export const quantityUnitsOptions = [
   { value: 'pounds', text: 'pounds' },
   { value: 'grams', text: 'grams' },
   { value: 'kilograms', text: 'kilograms' },
-  { value: 'separator' },
+  { value: 'separator', text: '---------', disabled: true },
   { value: 'milliliters', text: 'milliliters' },
   { value: 'liters', text: 'liters' },
   { value: 'pints', text: 'pints' },
   { value: 'quarts', text: 'quarts' },
   { value: 'gallons', text: 'gallons' },
-  { value: 'separator' },
+  { value: 'separator', text: '---------', disabled: true },
   { value: 'dozen', text: 'dozen' },
   { value: 'pack', text: 'pack' },
   { value: 'box', text: 'box' },
@@ -47,7 +47,9 @@ export const createOptions = (optionsArray) => {
     .map((option) => {
       // handle the seperators
       if (option.value === 'separator') {
-        return '<option disabled>──────────</option>';
+        return `<option value="${option.value}" ${
+          option.disabled ? 'disabled' : ''
+        }>${option.text}</option>`;
       } else {
         return `<option value="${option.value}">${option.text}</option>`;
       }
