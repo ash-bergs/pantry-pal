@@ -7,12 +7,12 @@
     <link rel="icon" href="./assets/icon-192.png" />
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./styles/nav.css" />
-    <link rel="stylesheet" href="./styles/modal.css" />
-    <link rel="stylesheet" href="./styles/optionsModal.css" />
-    <link rel="stylesheet" href="./styles/switch.css" />
-    <link rel="stylesheet" href="./styles/form.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/items.css" />
+    <link rel="stylesheet" href="./styles/modal.css" />
+    <link rel="stylesheet" href="./styles/form.css" />
+    <link rel="stylesheet" href="./styles/switch.css" />
+    <link rel="stylesheet" href="./styles/optionsModal.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="manifest" href="./manifest.json">
@@ -120,33 +120,33 @@
       <div class="filterInputs">
       
       <div class="filterControl">
-        <p class="controlText">
+        <p id="autoSortLabel" class="controlText">
           Auto Sort
         </p>
         <label class="switch">
-          <input id="autoSort" type="checkbox" class="switch-input">
+          <input name="autoSort" aria-labelledby="autoSortLabel" id="autoSort" type="checkbox" class="switch-input">
           <span class="switch-label" data-on="On" data-off="Off"></span>
           <span class="switch-handle"></span>
         </label>
       </div>
 
       <div class="filterControl">
-        <p class="controlText">
+        <p id="hideCheckedLabel" class="controlText">
           Hide Checked
         </p>
         <label class="switch">
-          <input id="hideChecked" type="checkbox" class="switch-input">
+          <input id="hideChecked" aria-labelledby="hideCheckedLabel" type="checkbox" class="switch-input">
           <span class="switch-label" data-on="On" data-off="Off"></span>
           <span class="switch-handle"></span>
         </label>
       </div>
 
       <div class="filterControl">
-        <p class="controlText">
+        <p id="sectionSortLabel" class="controlText">
           Sort by Section
         </p>
         <label class="switch">
-          <input id="sectionSort" type="checkbox" class="switch-input">
+          <input id="sectionSort" aria-labelledby="sectionSortLabel" type="checkbox" class="switch-input">
           <span class="switch-label" data-on="On" data-off="Off"></span>
           <span class="switch-handle"></span>
         </label>
