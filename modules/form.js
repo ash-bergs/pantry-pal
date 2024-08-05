@@ -63,11 +63,11 @@ itemForm.onsubmit = async (event) => {
 
   if (!valid) return;
 
-  const name = document.getElementById('nameInput').value;
+  const name = nameInput.value;
   const quantity = document.getElementById('quantityInput').value;
-  const quantityUnit = document.getElementById('quantityUnitInput').value;
-  const price = document.getElementById('priceInput').value;
-  const section = document.getElementById('sectionInput').value;
+  const quantityUnit = quantityUnitSelect.value;
+  const price = priceInput.value;
+  const section = sectionSelect.value;
 
   await db.items.add({ name, quantity, quantityUnit, price, section });
   // refresh items div
