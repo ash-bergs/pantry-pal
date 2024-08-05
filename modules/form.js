@@ -5,8 +5,15 @@ import {
   nameError,
   priceInput,
   priceError,
+  quantityUnitSelect,
+  sectionSelect,
 } from './domElements.js';
 import { populateItems } from './populateItems.js';
+import {
+  storeSectionOptions,
+  quantityUnitsOptions,
+  createOptions,
+} from './optionsData.js';
 import db from './db.js';
 
 export const clearForm = () => {
@@ -25,6 +32,16 @@ export const clearPriceErrors = () => {
   priceInput.setCustomValidity('');
   priceError.textContent = '';
 };
+
+// generate the options in section and quantity unit selects
+document.addEventListener('DOMContentLoaded', () => {
+  if (quantityUnitSelect) {
+    quantityUnitSelect.innerHTML = createOptions(quantityUnitsOptions);
+  }
+  if (sectionSelect) {
+    sectionSelect.innerHTML = createOptions(storeSectionOptions);
+  }
+});
 
 // Form submit
 itemForm.onsubmit = async (event) => {
