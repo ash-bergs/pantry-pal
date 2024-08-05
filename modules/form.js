@@ -50,10 +50,9 @@ itemForm.onsubmit = async (event) => {
   const quantity = document.getElementById('quantityInput').value;
   const quantityUnit = document.getElementById('quantityUnitInput').value;
   const price = document.getElementById('priceInput').value;
+  const section = document.getElementById('sectionInput').value;
 
-  // now we need to add section (store section)
-
-  await db.items.add({ name, quantity, quantityUnit, price });
+  await db.items.add({ name, quantity, quantityUnit, price, section });
   // refresh items div
   await populateItems();
 

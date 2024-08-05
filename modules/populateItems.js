@@ -1,4 +1,10 @@
-import { autoSort, hideChecked, itemsDiv, priceAmount } from './domElements.js';
+import {
+  autoSort,
+  hideChecked,
+  sectionSort,
+  itemsDiv,
+  priceAmount,
+} from './domElements.js';
 import db from './db.js';
 
 // fetch items from the database
@@ -10,16 +16,39 @@ export const populateItems = async () => {
     isPurchased: item.isPurchased ?? false,
   }));
 
-  if (autoSort.checked) {
-    sortedItems = sortedItems.sort((a, b) => a.isPurchased - b.isPurchased);
-  }
-
   if (hideChecked.checked) {
     sortedItems = sortedItems.filter((item) => !item.isPurchased);
   }
-  // console.log('sorted items', sortedItems);
+
+  // if both auto sort and section sort are turned on
+  if (autoSort.checked && sectionSort.checked) {
+    // create lists of the checked and unchecked items
+    const uncheckedItems = sortedItems.filter((item) => !item.isPurchased);
+    const checkedItems = sortedItems.filter((item) => item.isPurchased);
+
+    // sort each group by section
+    uncheckedItems.sort((a, b) => a.section.localeCompare(b.section));
+    checkedItems.sort((a, b) => a.section.localeCompare(b.section));
+
+    // concatenate both sets of sorted groups
+    sortedItems = uncheckedItems.concat(checkedItems);
+  }
+  // otherwise handle the scenarios independently
+  else {
+    if (autoSort.checked) {
+      sortedItems = sortedItems.sort((a, b) => a.isPurchased - b.isPurchased);
+    }
+
+    if (sectionSort.checked) {
+      sortedItems = sortedItems.sort((a, b) => {
+        if (a.section < b.section) return -1;
+        if (a.section > b.section) return 1;
+        return 0;
+      });
+    }
+  }
+
   if (!sortedItems.length) {
-    console.log('HIT');
     itemsDiv.innerHTML = `
     <div class="noItemsMessage">
       <p>There are no items in the list</p>
@@ -48,21 +77,27 @@ export const populateItems = async () => {
 
         <div class="itemInfo">
           <div class="itemNameContainer">
-            <p class="itemInfoHeading">Item</p>
-            <p class="itemNameText" id="item-name-${item.id}">${item.name}</p>
+            <div>
+              <p class="itemInfoHeading">Item</p>
+              <p class="itemNameText" id="item-name-${item.id}">${item.name}</p>
+            </div>
+            <p class="itemInfoHeading storeSection">${item.section}</p>
           </div>
+
           <div class="itemQuantityContainer">
             <p class="itemInfoHeading">Quantity</p>
             <p class="itemQuantityText" id="item-quantity-${item.id}">${
         item.quantity
       } ${item.quantityUnit}</p>
           </div>
+
           <div class="itemPriceContainer">
             <p class="itemInfoHeading">Est. Price</p>
-            <p class="itemPriceText" id="item-price-${item.id}">$${
+            <p class="itemPriceText" id="item-price-${item.id}">$ ${Number(
         item.price
-      } </p>
+      ).toFixed(2)} </p>
           </div>
+
         </div>
 
         <button

@@ -17,3 +17,4 @@ export const toggleArrow = document.getElementById('arrow');
 // filter options
 export const autoSort = document.getElementById('autoSort');
 export const hideChecked = document.getElementById('hideChecked');
+export const sectionSort = document.getElementById('sectionSort');
