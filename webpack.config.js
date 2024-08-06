@@ -27,16 +27,12 @@ module.exports = {
     ],
   },
   plugins: [
-    // copy and inject the html
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
-    // what other things might I need here? I think this is the basic needed....
     new CopyWebpackPlugin({
       patterns: [
         { from: 'manifest.json', to: 'manifest.json' },
-        // { from: 'sw.js', to: 'sw.js' }, // disabling the service worker for now, running into issues here :(
-        // { from: 'dexie.min.js', to: 'dexie.min.js' }, // now bringing in with npm
         { from: 'assets', to: 'assets' },
       ],
     }),

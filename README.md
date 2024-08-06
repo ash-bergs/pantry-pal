@@ -22,12 +22,16 @@ We also employ a [Workbox Service Worker](https://developer.chrome.com/docs/work
 - Hide checked items without deleting them
 - View estimated trip total
 
-#### 1.1
+#### 1.1 (currently working)
 
 - Organize list by store category
+- Improved quantity tracking
+- Bundled code for improved performance
+
+#### 1.2
+
 - Edit list items
 - Mass apply actions to the list
-- Improved quantity tracking
 
 ### Version 2
 
