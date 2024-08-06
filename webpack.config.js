@@ -35,7 +35,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'manifest.json', to: 'manifest.json' },
-        { from: 'sw.js', to: 'sw.js' },
+        // { from: 'sw.js', to: 'sw.js' }, // disabling the service worker for now, running into issues here :(
         { from: 'dexie.min.js', to: 'dexie.min.js' },
         { from: 'assets', to: 'assets' },
       ],
