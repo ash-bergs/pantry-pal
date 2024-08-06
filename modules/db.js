@@ -1,3 +1,5 @@
+import Dexie from 'dexie';
+
 const db = new Dexie('pantry-pal');
 
 // define the structure of the db

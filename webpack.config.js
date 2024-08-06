@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: './index.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -36,7 +36,7 @@ module.exports = {
       patterns: [
         { from: 'manifest.json', to: 'manifest.json' },
         // { from: 'sw.js', to: 'sw.js' }, // disabling the service worker for now, running into issues here :(
-        { from: 'dexie.min.js', to: 'dexie.min.js' },
+        // { from: 'dexie.min.js', to: 'dexie.min.js' }, // now bringing in with npm
         { from: 'assets', to: 'assets' },
       ],
     }),
