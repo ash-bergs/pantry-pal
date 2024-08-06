@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './index.js',
@@ -24,5 +26,28 @@ module.exports = {
       },
     ],
   },
-  mode: 'development', // Change to 'production' for minified output
+  plugins: [
+    // copy and inject the html
+    new HtmlWebpackPlugin({
+      template: './index.html',
+    }),
+    // what other things might I need here? I think this is the basic needed....
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'manifest.json', to: 'manifest.json' },
+        { from: 'sw.js', to: 'sw.js' },
+        { from: 'dexie.min.js', to: 'dexie.min.js' },
+        { from: 'assets', to: 'assets' },
+      ],
+    }),
+  ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+    open: true,
+  },
+  mode: 'production',
 };
