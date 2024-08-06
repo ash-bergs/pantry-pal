@@ -1,3 +1,15 @@
+import './index.css';
+import './styles/nav.css';
+import './styles/buttons.css';
+import './styles/items.css';
+import './styles/modal.css';
+import './styles/form.css';
+import './styles/switch.css';
+import './styles/optionsModal.css';
+import './modules/form.js';
+import './modules/listItems.js';
+import './modules/optionsData.js';
+
 import { addModal, hideAddFormModal } from './modules/modal.js';
 import { hideOptionsModal } from './modules/optionsModal.js';
 import { populateItems } from './modules/populateItems.js';
