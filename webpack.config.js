@@ -34,6 +34,7 @@ module.exports = {
       patterns: [
         { from: 'manifest.json', to: 'manifest.json' },
         { from: 'assets', to: 'assets' },
+        { from: 'README.md', to: 'README.md' },
       ],
     }),
   ],
