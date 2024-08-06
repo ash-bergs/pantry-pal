@@ -1,7 +1,7 @@
 {
   "name": "pantry-pal",
   "version": "1.0.0",
-  "description": "### Overview",
+  "description": "Keep track of your in-house inventory, build shopping lists, and more with a distraction-free, offline capable interface.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
