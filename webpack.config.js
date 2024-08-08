@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: './index.js',
@@ -36,6 +37,10 @@ module.exports = {
         { from: 'assets', to: 'assets' },
         { from: 'README.md', to: 'README.md' },
       ],
+    }),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
     }),
   ],
   devServer: {

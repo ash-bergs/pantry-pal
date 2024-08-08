@@ -25,7 +25,8 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.0.4",
+    "workbox-webpack-plugin": "^7.1.0"
   },
   "dependencies": {
     "dexie": "^4.0.8"
