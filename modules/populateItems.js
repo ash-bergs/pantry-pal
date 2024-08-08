@@ -3,62 +3,49 @@ import {
   hideChecked,
   sectionSort,
   itemsDiv,
-  priceAmount,
+  stickyQuickSortFooter,
+  quickSortDiv,
 } from './domElements.js';
 import db from './db.js';
 
-// fetch items from the database
+// TODO: Modularize a bunch of stuff here - footer code, sorting functions, etc
+
+export let selectedSection = null;
+
 export const populateItems = async () => {
+  // fetch items from the database
   const allItems = await db.items.reverse().toArray();
-  let sortedItems = allItems.map((item) => ({
-    ...item,
-    // add false - as this doesn't come back at all if not checked and set
-    isPurchased: item.isPurchased ?? false,
-  }));
+  let sortedItems;
+  // filter immediately on hide checked and section
+  const filteredItems = filterItems(allItems, hideChecked, selectedSection);
 
-  if (hideChecked.checked) {
-    sortedItems = sortedItems.filter((item) => !item.isPurchased);
-  }
+  sortedItems = filteredItems;
+  // arrange items based on auto sort or section sort
+  if (sectionSort.checked) {
+    sortedItems = sortItemsBySection(sortedItems);
 
-  // if both auto sort and section sort are turned on
-  if (autoSort.checked && sectionSort.checked) {
-    // create lists of the checked and unchecked items
-    const uncheckedItems = sortedItems.filter((item) => !item.isPurchased);
-    const checkedItems = sortedItems.filter((item) => item.isPurchased);
-
-    // sort each group by section
-    uncheckedItems.sort((a, b) => a.section.localeCompare(b.section));
-    checkedItems.sort((a, b) => a.section.localeCompare(b.section));
-
-    // concatenate both sets of sorted groups
-    sortedItems = uncheckedItems.concat(checkedItems);
-  }
-  // otherwise handle the scenarios independently
-  else {
     if (autoSort.checked) {
-      sortedItems = sortedItems.sort((a, b) => a.isPurchased - b.isPurchased);
+      sortedItem = sortItemsByPurchaseStatus(sortedItems);
     }
-
-    if (sectionSort.checked) {
-      sortedItems = sortedItems.sort((a, b) => {
-        if (a.section < b.section) return -1;
-        if (a.section > b.section) return 1;
-        return 0;
-      });
-    }
+  } else if (autoSort.checked) {
+    sortedItems = sortItemsByPurchaseStatus(sortedItems);
   }
 
+  // if there are no items return no items msg and don't render the sticky footer
   if (!sortedItems.length) {
     itemsDiv.innerHTML = `
     <div class="noItemsMessage">
       <p>There are no items in the list</p>
-      <p>Click "Add New" above to get started!</p>
+      <p>Click "Add New" above to add items to the list</p>
     </div>
     `;
-    priceAmount.innerText = '$0.00';
+    // don't show the 'sticky footer' if there are no items
+    //   modal.classList.add('open');
+    stickyQuickSortFooter.classList.add('closed');
     return;
   }
 
+  // creating main list
   itemsDiv.innerHTML = sortedItems
     .map(
       (item) => `
@@ -112,9 +99,96 @@ export const populateItems = async () => {
     )
     .join('');
 
-  // calculate the prices of each item with quantity multiplier
-  const priceList = allItems.map((item) => item.price * item.quantity);
-  const totalPrice = priceList.reduce((a, b) => a + b, 0);
+  // create sticky footer sort options based on categories
+  const storeSectionData = generateStoreSectionData(allItems);
+  stickyQuickSortFooter.classList.remove('closed');
 
-  priceAmount.innerText = '$' + totalPrice.toFixed(2);
+  quickSortDiv.innerHTML = Object.keys(storeSectionData)
+    .sort()
+    .map(
+      (section) => `
+      <div class="itemGroupContainer" onclick="filterBySection('${section}')">
+        <div class="itemGroup ${section === selectedSection ? 'selected' : ''}
+        ${
+          storeSectionData[section].isPurchased ===
+          storeSectionData[section].total
+            ? 'completed'
+            : ''
+        }
+        ">
+          <p class="inCartNum">${storeSectionData[section].isPurchased}</p>
+          <p class="separator">/</p>
+          <p class="totalNum">${storeSectionData[section].total}</p>
+        </div>
+        <p class="itemGroupName">${capitalizeFirstLetter(section)}</p>
+      </div>
+    `
+    )
+    .join('');
+};
+
+const generateStoreSectionData = (items) => {
+  const storeSectionData = {};
+
+  items.forEach((item) => {
+    const section = item.section || 'Other';
+
+    // if the section isn't already recorded, add it
+    if (!storeSectionData[section]) {
+      storeSectionData[section] = { total: 0, isPurchased: 0 };
+    }
+    // always add it to the total count
+    storeSectionData[section].total += 1;
+    // determine if purchased
+    if (item.isPurchased) {
+      storeSectionData[section].isPurchased += 1;
+    }
+  });
+
+  return storeSectionData;
+};
+
+const filterBySection = (section) => {
+  if (selectedSection === section) {
+    selectedSection = null;
+  } else {
+    selectedSection = section;
+  }
+
+  populateItems();
+};
+
+// helper for section bubbles in footer
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+window.filterBySection = filterBySection;
+
+// helper to filter based on hideChecked and selected section
+const filterItems = (items, hideChecked, selectedSection) => {
+  let filteredItems = items;
+
+  if (hideChecked.checked) {
+    filteredItems = filteredItems.filter((item) => !item.isPurchased);
+  }
+
+  if (selectedSection) {
+    filteredItems = filteredItems.filter((item) =>
+      selectedSection === 'Other'
+        ? !item.section
+        : item.section === selectedSection
+    );
+  }
+
+  return filteredItems;
+};
+
+// sort items by section
+const sortItemsBySection = (items) => {
+  return items.sort((a, b) => a.section.localeCompare(b.section));
+};
+
+const sortItemsByPurchaseStatus = (items) => {
+  return items.sort((a, b) => a.isPurchased - b.isPurchased);
 };

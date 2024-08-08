@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  /* font-family: var(--heading-font-family); */
   font-size: 16px;
   font-style: italic;
   color: #999999;
@@ -109,35 +108,77 @@
 
 .divider {
   border-top: 1px solid var(--nav-bg-color);
-  /* margin-top: 1rem; */
   margin-left: 2rem;
   margin-right: 2rem;
-}
-
-#totalPriceDiv {
-  /* margin: 2rem; */
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  display: flex;
-  justify-content: space-between;
-  font-size: 18px;
-  align-items: center;
-  color: var(--text-color);
-  font-family: var(--heading-font-family);
-  font-weight: 600;
-}
-
-#priceAmount {
-  background: #cdcccb;
-  padding: 0.75rem;
-  border-radius: 8px;
-  font-size: 20px;
-  font-family: sans-serif;
 }
 
 #toggleMessage {
   font-size: 16px;
   font-family: var(--heading-font-family);
+}
+
+/* bubbles at the bottom to quick sort the list */
+.closed {
+  display: none;
+}
+
+.stickyQuickSortFooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  z-index: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap; /* Prevents items from wrapping */
+  box-shadow: var(--drawer-shadow);
+}
+
+#quickSortDiv {
+  display: inline-flex; /* inline-flex to respect the white-space property */
+  gap: 1.6rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#quickSortWrapper {
+  text-align: center;
+}
+
+.itemGroupContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--heading-font-family);
+  color: var(--text-color);
+  font-size: large;
+  font-weight: 600;
+  white-space: nowrap; /* Ensure items do not wrap */
+}
+
+.itemGroup {
+  background: var(--nav-bg-color);
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+  font-size: medium;
+  align-items: center;
+  color: white;
+  border-radius: 100%;
+  height: 60px;
+  width: 60px;
+  box-shadow: var(--button-shadow);
+}
+
+.completed {
+  background-color: var(--button-bg-color);
+}
+
+.selected {
+  outline: 3px dashed var(--nav-bg-color);
 }
