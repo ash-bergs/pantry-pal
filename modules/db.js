@@ -61,7 +61,36 @@ const timestampsMiddleware = {
   },
 };
 
-// use our timestamp middlware
+// add isPurchased default false
+const setInitPurchasedMiddleware = {
+  stack: 'dbcore',
+  name: 'timestampsMiddleware',
+  create: (downlevelDBCore) => {
+    return {
+      ...downlevelDBCore,
+      table: (tableName) => {
+        const downlevelTable = downlevelDBCore.table(tableName);
+
+        return {
+          ...downlevelTable,
+          mutate: async (req) => {
+            if (tableName === 'items') {
+              if (req.type === 'add') {
+                req.values.forEach((item) => {
+                  item.isPurchased = false;
+                });
+              }
+            }
+            return downlevelTable.mutate(req);
+          },
+        };
+      },
+    };
+  },
+};
+
+// use our middlware
 db.use(timestampsMiddleware);
+db.use(setInitPurchasedMiddleware);
 
 export default db;
