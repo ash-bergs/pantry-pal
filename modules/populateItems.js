@@ -9,8 +9,11 @@ import {
 import db from './db.js';
 
 // TODO: Modularize a bunch of stuff here - footer code, sorting functions, etc
-
 export let selectedSection = null;
+// setter for the selectedSection - used in listItems.js
+export const setSelectedSection = (section) => {
+  selectedSection = section;
+};
 
 export const populateItems = async () => {
   // fetch items from the database
@@ -163,8 +166,6 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-window.filterBySection = filterBySection;
-
 // helper to filter based on hideChecked and selected section
 const filterItems = (items, hideChecked, selectedSection) => {
   let filteredItems = items;
@@ -192,3 +193,5 @@ const sortItemsBySection = (items) => {
 const sortItemsByPurchaseStatus = (items) => {
   return items.sort((a, b) => a.isPurchased - b.isPurchased);
 };
+
+window.filterBySection = filterBySection;
