@@ -1,6 +1,6 @@
 :root {
-  --main-bg-color: lavendarblush;
-  --nav-bg-color: #33a7ff;
+  --main-bg-color: white;
+  --nav-bg-color: #2bc1ff;
   --background-blue-alternate: rgba(51, 167, 255, 0.5);
   --nav-text-color: #fff;
   --text-color: #364958;
@@ -13,6 +13,8 @@
   --button-hover-bg-color: #fb3640;
   --button-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  --drawer-shadow: rgba(50, 50, 93, 0.25) 0px 25px 25px 6px,
+    rgba(0, 0, 0, 0.5) 0px 3px 4px 1px;
   --heading-font-family: 'Urbanist', sans-serif;
 }
 
@@ -50,15 +52,6 @@ body {
     padding-left: 2rem;
     padding-right: 2rem;
   }
-}
-
-.stickyPriceFooter {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  z-index: 1;
-  padding: 10px;
 }
 
 /* ICONS */

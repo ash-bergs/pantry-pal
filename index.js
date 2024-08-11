@@ -12,6 +12,7 @@ import './modules/optionsData.js';
 
 import { addModal, hideAddFormModal } from './modules/modal.js';
 import { hideOptionsModal } from './modules/optionsModal.js';
+import { removeItem, toggleItemPurchaseStatus } from './modules/listItems.js';
 import { populateItems } from './modules/populateItems.js';
 import db from './modules/db.js';
 import { exportDb } from './modules/exportDb.js';
@@ -47,16 +48,6 @@ window.addEventListener('keydown', (event) => {
 });
 
 /* LIST ITEM ACTIONS */
-const toggleItemPurchaseStatus = async (event, id) => {
-  await db.items.update(id, { isPurchased: !!event.target.checked });
-  await populateItems();
-};
-
-const removeItem = async (id) => {
-  await db.items.delete(id);
-  await populateItems();
-};
-
 window.removeItem = removeItem;
 window.toggleItemPurchaseStatus = toggleItemPurchaseStatus;
 
