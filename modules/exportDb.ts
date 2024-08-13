@@ -1,4 +1,4 @@
-import db from './db.js';
+import db from './db';
 
 //TODO: We should look into transactions to handle these fetches?
 // https://dexie.org/docs/Dexie/Dexie.transaction()
@@ -8,7 +8,8 @@ async function getShoppingItems() {
   return data;
 }
 
-function createDownload(data) {
+// todo: our data is JSON Items - build Items type
+function createDownload(data: any) {
   const jsonData = JSON.stringify(data);
 
   const blob = new Blob([jsonData], { type: 'application/json ' });

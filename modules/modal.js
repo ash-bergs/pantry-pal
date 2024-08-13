@@ -1,4 +1,4 @@
-import { itemForm } from './domElements.js';
+import { itemForm } from './domElements.ts';
 
 // get modal and focusable elements
 export const addModal = document.getElementById('modal');
@@ -67,3 +67,21 @@ addModal.addEventListener('keydown', (event) => {
 openModalButton.addEventListener('click', showModal);
 // When the user clicks on <span> (x), close the modal
 closeModalButton.addEventListener('click', hideAddFormModal);
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener('click', (event) => {
+  // add options modal
+  if (event.target === modal) {
+    hideAddFormModal();
+  }
+});
+
+// When the user presses the Escape key, close the modal
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    // if the add item modal is open, close it and return focus to add new item button
+    if (addModal.classList.contains('open')) {
+      hideAddFormModal();
+    }
+  }
+});

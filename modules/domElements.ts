@@ -15,9 +15,15 @@ export const showItemsControlContainer =
 export const toggleMessage = document.getElementById('toggleMessage');
 export const toggleArrow = document.getElementById('arrow');
 // filter options
-export const autoSort = document.getElementById('autoSort');
-export const hideChecked = document.getElementById('hideChecked');
-export const sectionSort = document.getElementById('sectionSort');
+export const autoSort = document.getElementById(
+  'autoSort'
+) as HTMLInputElement | null;
+export const hideChecked = document.getElementById(
+  'hideChecked'
+) as HTMLInputElement | null;
+export const sectionSort = document.getElementById(
+  'sectionSort'
+) as HTMLInputElement | null;
 // footer filters
 export const stickyQuickSortFooter = document.getElementById(
   'stickyQuickSortFooter'
