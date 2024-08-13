@@ -14,8 +14,8 @@ import './modules/modal.js';
 import './modules/optionsData.js';
 import './modules/optionsModal.js';
 
-import { populateItems } from './modules/populateItems.ts';
-import { exportDb } from './modules/exportDb.ts';
+import { populateItems } from './modules/populateItems';
+import { exportDb } from './modules/exportDb';
 
 // get download button and add action
 const downloadButton = document.getElementById('backupData');
