@@ -8,7 +8,6 @@ export const openModalButton = document.getElementById(
   'openOptionsModalButton'
 );
 
-console.log('open options sidebar', openModalButton);
 // define the types of focusable elements
 const focusableElements =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -20,7 +19,6 @@ export const lastFocusableElement =
   focusableContent[focusableContent.length - 1];
 
 export const showModal = () => {
-  console.log('SHOW MODAL');
   modal.classList.add('open');
   modal.style.width = '60%';
   modal.setAttribute('aria-hidden', 'false');
