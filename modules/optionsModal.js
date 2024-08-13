@@ -1,5 +1,5 @@
-import { autoSort, hideChecked, sectionSort } from './domElements.js';
-import { populateItems } from './populateItems.js';
+import { autoSort, hideChecked, sectionSort } from './domElements.ts';
+import { populateItems } from './populateItems.ts';
 
 // get modal and focusable elements
 export const modal = document.getElementById('optionsModal');
@@ -7,6 +7,7 @@ export const modal = document.getElementById('optionsModal');
 export const openModalButton = document.getElementById(
   'openOptionsModalButton'
 );
+
 // define the types of focusable elements
 const focusableElements =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -64,3 +65,9 @@ closeModalButton.addEventListener('click', hideOptionsModal);
 autoSort.addEventListener('change', populateItems);
 hideChecked.addEventListener('change', populateItems);
 sectionSort.addEventListener('change', populateItems);
+
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    hideOptionsModal();
+  }
+});

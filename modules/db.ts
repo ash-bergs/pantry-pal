@@ -1,42 +1,53 @@
-import Dexie from 'dexie';
+import Dexie, { DBCore, DBCoreTable, DBCoreMutateRequest, Table } from 'dexie';
 
-const db = new Dexie('pantry-pal');
+export interface Item {
+  id: number;
+  name: string;
+  price: number;
+  isPurchased: boolean;
+  section?: string;
+  quantityUnit?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+// class created to inform TS about our DB structure
+class PantryPalDatabase extends Dexie {
+  items!: Table<Item, number>;
 
-// define the structure of the db
-// if we change this after it's been created we need to increment the version and define it
-db.version(1).stores({
-  items: '++id, name, price, isPurchased',
-});
+  constructor() {
+    super('pantry-pal');
+    this.version(1).stores({
+      items: '++id, name, price, isPurchased',
+    });
 
-// next version
-// add: store section - should match an enum
-// enum values - produce, dairy, ethnic foods, meat dept, deli, baking, spice, snack, frozen, drinks
-// quantity unit - also an enum
-// enum - pounds, ounces, units, box
-// createdAt - date
-// updatedAt - date
-db.version(2).stores({
-  items:
-    '++id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
-});
+    this.version(2).stores({
+      items:
+        '++id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
+    });
+  }
+}
+
+const db = new PantryPalDatabase();
 
 // https://dexie.org/docs/DBCore/DBCore
 // when uploading backed up data, we'll need to figure out how to skip the actions in here, since we'll already have created and updated at
 // define dbcore middleware - if this grows a lot, we should add a middleware module
+
+/** Sets `updatedAt`/`createdAt` fields on Items */
 const timestampsMiddleware = {
-  stack: 'dbcore',
+  stack: 'dbcore' as const,
   name: 'timestampsMiddleware',
-  create: (downlevelDBCore) => {
+  create: (downlevelDBCore: DBCore): DBCore => {
     return {
       ...downlevelDBCore,
-      table: (tableName) => {
+      table: (tableName: string): DBCoreTable => {
         // retrieve the db table based on name
         const downlevelTable = downlevelDBCore.table(tableName);
 
         return {
           ...downlevelTable,
           // when mutating, determine if create/update
-          mutate: async (req) => {
+          mutate: async (req: DBCoreMutateRequest) => {
             if (tableName === 'items') {
               const now = new Date().toISOString();
 
@@ -61,14 +72,14 @@ const timestampsMiddleware = {
   },
 };
 
-// add isPurchased default false
+/** Defaults the `isPurchased` field to `false` */
 const setInitPurchasedMiddleware = {
-  stack: 'dbcore',
+  stack: 'dbcore' as const,
   name: 'timestampsMiddleware',
-  create: (downlevelDBCore) => {
+  create: (downlevelDBCore: DBCore): DBCore => {
     return {
       ...downlevelDBCore,
-      table: (tableName) => {
+      table: (tableName: string): DBCoreTable => {
         const downlevelTable = downlevelDBCore.table(tableName);
 
         return {
@@ -89,7 +100,6 @@ const setInitPurchasedMiddleware = {
   },
 };
 
-// use our middlware
 db.use(timestampsMiddleware);
 db.use(setInitPurchasedMiddleware);
 

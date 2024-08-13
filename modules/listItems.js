@@ -1,9 +1,9 @@
-import db from './db';
+import db from './db.ts';
 import {
   populateItems,
   selectedSection,
   setSelectedSection,
-} from './populateItems';
+} from './populateItems.ts';
 
 /** Toggle Purchase (in cart) Status - items will appear crossed off */
 export const toggleItemPurchaseStatus = async (event, id) => {
@@ -30,3 +30,8 @@ export const removeItem = async (id) => {
   await db.items.delete(id);
   await populateItems();
 };
+
+window.removeItem = removeItem;
+window.toggleItemPurchaseStatus = toggleItemPurchaseStatus;
+//todo: pantry page - when an item is removed from shopping list, add to pantry
+//todo: mass delete (all checked items)

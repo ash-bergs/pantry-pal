@@ -5,17 +5,30 @@ import {
   itemsDiv,
   stickyQuickSortFooter,
   quickSortDiv,
-} from './domElements.js';
-import db from './db.js';
+} from './domElements';
+import db, { Item } from './db';
+
+interface SectionData {
+  total: number;
+  isPurchased: number;
+}
+
+type StoreSectionData = {
+  [key: string]: SectionData;
+};
 
 // TODO: Modularize a bunch of stuff here - footer code, sorting functions, etc
 export let selectedSection = null;
 // setter for the selectedSection - used in listItems.js
-export const setSelectedSection = (section) => {
+export const setSelectedSection = (section: any) => {
   selectedSection = section;
 };
 
 export const populateItems = async () => {
+  if (!itemsDiv || !stickyQuickSortFooter || !quickSortDiv) {
+    console.error('Required DOM elements missing');
+    return;
+  }
   // fetch items from the database
   const allItems = await db.items.reverse().toArray();
   let sortedItems;
@@ -24,18 +37,18 @@ export const populateItems = async () => {
 
   sortedItems = filteredItems;
   // arrange items based on auto sort or section sort
-  if (sectionSort.checked) {
+  if (sectionSort && sectionSort.checked) {
     sortedItems = sortItemsBySection(sortedItems);
 
-    if (autoSort.checked) {
-      sortedItem = sortItemsByPurchaseStatus(sortedItems);
+    if (autoSort && autoSort.checked) {
+      sortedItems = sortItemsByPurchaseStatus(sortedItems);
     }
-  } else if (autoSort.checked) {
+  } else if (autoSort && autoSort.checked) {
     sortedItems = sortItemsByPurchaseStatus(sortedItems);
   }
 
   // if there are no items return no items msg and don't render the sticky footer
-  if (!sortedItems.length) {
+  if (itemsDiv && !sortedItems.length) {
     itemsDiv.innerHTML = `
     <div class="noItemsMessage">
       <p>There are no items in the list</p>
@@ -51,7 +64,7 @@ export const populateItems = async () => {
   // creating main list
   itemsDiv.innerHTML = sortedItems
     .map(
-      (item) => `
+      (item: any) => `
       <div class="item ${item.isPurchased && 'purchased'}" id="item-${
         item.id
       }" role="listitem" aria-labelledby="item-name-${item.id}">
@@ -130,10 +143,10 @@ export const populateItems = async () => {
     .join('');
 };
 
-const generateStoreSectionData = (items) => {
-  const storeSectionData = {};
+const generateStoreSectionData = (items: Item[]): StoreSectionData => {
+  const storeSectionData: StoreSectionData = {};
 
-  items.forEach((item) => {
+  items.forEach((item: any) => {
     const section = item.section || 'Other';
 
     // if the section isn't already recorded, add it
@@ -151,7 +164,7 @@ const generateStoreSectionData = (items) => {
   return storeSectionData;
 };
 
-const filterBySection = (section) => {
+const filterBySection = (section: any) => {
   if (selectedSection === section) {
     selectedSection = null;
   } else {
@@ -162,20 +175,24 @@ const filterBySection = (section) => {
 };
 
 // helper for section bubbles in footer
-const capitalizeFirstLetter = (string) => {
+const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 // helper to filter based on hideChecked and selected section
-const filterItems = (items, hideChecked, selectedSection) => {
+const filterItems = (
+  items: any,
+  hideChecked: any,
+  selectedSection: string | null
+) => {
   let filteredItems = items;
 
   if (hideChecked.checked) {
-    filteredItems = filteredItems.filter((item) => !item.isPurchased);
+    filteredItems = filteredItems.filter((item: any) => !item.isPurchased);
   }
 
   if (selectedSection) {
-    filteredItems = filteredItems.filter((item) =>
+    filteredItems = filteredItems.filter((item: any) =>
       selectedSection === 'Other'
         ? !item.section
         : item.section === selectedSection
@@ -186,12 +203,12 @@ const filterItems = (items, hideChecked, selectedSection) => {
 };
 
 // sort items by section
-const sortItemsBySection = (items) => {
-  return items.sort((a, b) => a.section.localeCompare(b.section));
+const sortItemsBySection = (items: any) => {
+  return items.sort((a: any, b: any) => a.section.localeCompare(b.section));
 };
 
-const sortItemsByPurchaseStatus = (items) => {
-  return items.sort((a, b) => a.isPurchased - b.isPurchased);
+const sortItemsByPurchaseStatus = (items: any) => {
+  return items.sort((a: any, b: any) => a.isPurchased - b.isPurchased);
 };
 
 window.filterBySection = filterBySection;

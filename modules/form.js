@@ -7,14 +7,14 @@ import {
   priceError,
   quantityUnitSelect,
   sectionSelect,
-} from './domElements.js';
-import { populateItems } from './populateItems.js';
+} from './domElements.ts';
+import { populateItems } from './populateItems.ts';
 import {
   storeSectionOptions,
   quantityUnitsOptions,
   createOptions,
 } from './optionsData.js';
-import db from './db.js';
+import db from './db.ts';
 
 export const clearForm = () => {
   clearNameErrors();
