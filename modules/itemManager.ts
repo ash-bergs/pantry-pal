@@ -53,6 +53,23 @@ class ItemManager {
   private sortItemsByPurchaseStatus = (items: Item[]): Item[] => {
     return items.sort((a: any, b: any) => a.isPurchased - b.isPurchased);
   };
+  private async countItemsInSection(
+    isOtherSection: boolean,
+    id: number
+  ): Promise<number> {
+    const item = await db.items.get(id);
+
+    if (!item) {
+      console.warn(`Item with ID ${id} not found.`);
+      return 0;
+    }
+
+    if (item && isOtherSection)
+      return await db.items.filter((item) => !item.section).count();
+    else if (item && item.section)
+      return await db.items.where('section').equals(item.section).count();
+    else return 0;
+  }
 
   /** Creates an object to track the list categories and number of items in each */
   private async generateStoreSectionData(
@@ -107,7 +124,7 @@ class ItemManager {
     const storeSectionsAndCounts = await this.generateStoreSectionData(
       allListItems
     );
-    console.log('sections and counts', storeSectionsAndCounts);
+
     renderItemsList(sortedItems);
     renderSectionBubbles(storeSectionsAndCounts, this.selectedSection);
   }
@@ -119,23 +136,21 @@ class ItemManager {
     price: number,
     section: string
   ) {
-    console.log('adding item');
     await db.items.add({ name, quantity, quantityUnit, price, section });
     await this.populateItems();
   }
 
   async removeItem(id: number) {
-    // if we're removing and the list is filtered by section
     if (this.selectedSection) {
       const itemToRm = await db.items.get(id);
-      if (!itemToRm?.section) return;
+      const isOtherSection =
+        this.selectedSection === 'Other' && !itemToRm?.section;
+      const isSelectedSection = itemToRm?.section === this.selectedSection;
 
-      const itemsInSection = await db.items
-        .where('section')
-        .equals(itemToRm?.section)
-        .count();
+      const itemsInSection = await this.countItemsInSection(isOtherSection, id);
+
       const isItemToRmSingle =
-        itemToRm?.section === this.selectedSection && itemsInSection === 1;
+        (isOtherSection || isSelectedSection) && itemsInSection === 1;
 
       if (isItemToRmSingle) {
         this.setSelectedSection(null);
