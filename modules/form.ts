@@ -5,31 +5,33 @@ import {
   nameError,
   priceInput,
   priceError,
+  quantityInput,
   quantityUnitSelect,
   sectionSelect,
-} from './domElements.ts';
-import { populateItems } from './populateItems.ts';
+} from './domElements';
+import { itemManager } from './itemManager';
 import {
   storeSectionOptions,
   quantityUnitsOptions,
   createOptions,
 } from './optionsData.js';
-import db from './db.ts';
 
 export const clearForm = () => {
   clearNameErrors();
   clearPriceErrors();
   itemForm.reset();
-  nameInput.focus(); // return focus to the top form input
+  nameInput?.focus(); // return focus to the top form input
 };
 
 export const clearNameErrors = () => {
   nameInput.setCustomValidity('');
+  if (!nameError) return;
   nameError.textContent = '';
 };
 
 export const clearPriceErrors = () => {
   priceInput.setCustomValidity('');
+  if (!priceError) return;
   priceError.textContent = '';
 };
 
@@ -43,10 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Form submit
 itemForm.onsubmit = async (event) => {
   event.preventDefault();
-  // handle assigning errors
+
+  if (
+    !nameInput ||
+    !nameError ||
+    !priceInput ||
+    !priceError ||
+    !sectionSelect ||
+    !quantityUnitSelect
+  ) {
+    console.error('Missing required DOM elements');
+    return;
+  }
+
   let valid = true;
 
   if (!nameInput.validity.valid) {
@@ -54,7 +67,6 @@ itemForm.onsubmit = async (event) => {
     nameError.textContent = nameInput.validationMessage;
     valid = false;
   }
-
   if (!priceInput.validity.valid) {
     priceInput.setCustomValidity('Please enter a valid price (e.g. $1.99)');
     priceError.textContent = priceInput.validationMessage;
@@ -64,19 +76,23 @@ itemForm.onsubmit = async (event) => {
   if (!valid) return;
 
   const name = nameInput.value;
-  const quantity = document.getElementById('quantityInput').value;
+  const quantity = quantityInput.value;
   const quantityUnit = quantityUnitSelect.value;
   const price = priceInput.value;
   const section = sectionSelect.value;
 
-  await db.items.add({ name, quantity, quantityUnit, price, section });
-  // refresh items div
-  await populateItems();
+  await itemManager.addItem(
+    name,
+    Number(quantity),
+    quantityUnit,
+    Number(price),
+    section
+  );
 
-  itemForm.reset();
-  document.getElementById('nameInput').focus(); // return focus to the top form input
+  itemForm?.reset();
+  nameInput?.focus();
 };
 
-clearFormButton.addEventListener('click', clearForm);
-nameInput.addEventListener('input', clearNameErrors);
-priceInput.addEventListener('input', clearPriceErrors);
+clearFormButton?.addEventListener('click', clearForm);
+nameInput?.addEventListener('input', clearNameErrors);
+priceInput?.addEventListener('input', clearPriceErrors);
