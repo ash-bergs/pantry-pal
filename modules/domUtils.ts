@@ -67,11 +67,13 @@ export const renderSectionBubbles = (
   storeSectionData: any,
   selectedSection: string | null
 ) => {
-  if (!quickSortDiv) {
+  if (!quickSortDiv || !stickyQuickSortFooter) {
     console.error('Missing required DOM elements');
     return;
   }
-  console.log('render section bubbles', storeSectionData);
+
+  stickyQuickSortFooter.classList.remove('closed');
+
   quickSortDiv.innerHTML = Object.keys(storeSectionData)
     .sort()
     .map(
