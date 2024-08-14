@@ -1,11 +1,12 @@
 import Dexie, { DBCore, DBCoreTable, DBCoreMutateRequest, Table } from 'dexie';
 
 export interface Item {
-  id: number;
+  id?: number;
   name: string;
   price: number;
-  isPurchased: boolean;
+  isPurchased?: boolean;
   section?: string;
+  quantity?: number;
   quantityUnit?: string;
   createdAt?: string;
   updatedAt?: string;

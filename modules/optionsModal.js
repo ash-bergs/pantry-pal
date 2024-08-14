@@ -1,5 +1,4 @@
 import { autoSort, hideChecked, sectionSort } from './domElements.ts';
-import { populateItems } from './populateItems.ts';
 
 // get modal and focusable elements
 export const modal = document.getElementById('optionsModal');
@@ -62,9 +61,9 @@ openModalButton.addEventListener('click', showModal);
 // When the user clicks on <span> (x), close the modal
 closeModalButton.addEventListener('click', hideOptionsModal);
 
-autoSort.addEventListener('change', populateItems);
-hideChecked.addEventListener('change', populateItems);
-sectionSort.addEventListener('change', populateItems);
+autoSort.addEventListener('change', window.populateItems);
+hideChecked.addEventListener('change', window.populateItems);
+sectionSort.addEventListener('change', window.populateItems);
 
 window.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
