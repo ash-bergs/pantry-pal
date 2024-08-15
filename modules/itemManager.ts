@@ -171,7 +171,6 @@ class ItemManager {
   /** Sync indexdb content with uploaded JSON file */
   async syncUpload(file: File) {
     try {
-      console.log('syncing upload');
       const text = await file.text();
       const items: Item[] = JSON.parse(text);
       console.log('upload items: ', items);
