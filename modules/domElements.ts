@@ -1,9 +1,11 @@
 export const itemsDiv = document.getElementById('itemsDiv');
 
 /* ---------------------------------- FORM ---------------------------------- */
-export const itemForm = document.getElementById('itemForm') as HTMLFormElement;
+export const addItemForm = document.getElementById(
+  'addItemForm'
+) as HTMLFormElement;
 export const clearFormButton = document.getElementById('cancelButton');
-/* ------------------- FORM INPUTS AND ERR MSG CONTAINERS ------------------- */
+/* ------------------- ADD ITEM FORM INPUTS AND ERR MSG CONTAINERS ------------------- */
 export const nameInput = document.getElementById(
   'nameInput'
 ) as HTMLInputElement;
@@ -25,6 +27,13 @@ export const showItemsControlContainer =
   document.getElementById('showItemsControl');
 export const toggleMessage = document.getElementById('toggleMessage');
 export const toggleArrow = document.getElementById('arrow');
+/* ---------------------------- UPLOAD FORM \ INPUT --------------------------- */
+export const uploadBackupForm = document.getElementById(
+  'uploadBackupForm'
+) as HTMLFormElement;
+export const backupFileInput = document.getElementById(
+  'backupFileInput'
+) as HTMLInputElement;
 /* ----------------------------- FILTER TOGGLES ----------------------------- */
 export const autoSort = document.getElementById(
   'autoSort'

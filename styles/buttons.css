@@ -43,6 +43,13 @@ button:active {
   box-shadow: var(--button-shadow), #023568 0 -12px 6px inset;
 }
 
+.uploadBackupButton {
+  width: 100%;
+  color: #fff;
+  background: var(--button-bg-color);
+  box-shadow: var(--button-shadow), #31c185 0 -12px 6px inset;
+}
+
 @media (max-width: 600px) {
   #openModalButton {
     width: 100%;

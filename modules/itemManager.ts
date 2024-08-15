@@ -30,6 +30,7 @@ class ItemManager {
   private async fetchItems(): Promise<Item[]> {
     return await db.items.reverse().toArray();
   }
+  /** filter items by selected store section or if user has 'hide checked' turned on from options */
   private filterItems = (items: Item[], hideChecked: any) => {
     let filteredItems = items;
 
@@ -53,6 +54,7 @@ class ItemManager {
   private sortItemsByPurchaseStatus = (items: Item[]): Item[] => {
     return items.sort((a: any, b: any) => a.isPurchased - b.isPurchased);
   };
+  /** get the other items in the same section and return a count */
   private async countItemsInSection(
     isOtherSection: boolean,
     id: number
@@ -160,11 +162,32 @@ class ItemManager {
     await db.items.delete(id);
     await this.populateItems();
   }
-
+  /** Mark an item as 'in cart' //TODO: update from 'purchased' to 'in cart' */
   async toggleItemPurchaseStatus(event: Event, id: number) {
     const target = event.target as HTMLInputElement;
     await db.items.update(id, { isPurchased: !!target.checked });
     await this.populateItems();
+  }
+  /** Sync indexdb content with uploaded JSON file */
+  async syncUpload(file: File) {
+    try {
+      const text = await file.text();
+      const items: Item[] = JSON.parse(text);
+      console.log('upload items: ', items);
+
+      // add items in parallel, skip dupes
+      await Promise.all(
+        items.map(async (item) => {
+          if (!item.id) return; // these should always have ids
+          const existingItem = await db.items.get(item.id);
+          if (!existingItem) await db.items.add(item);
+        })
+      );
+
+      await this.populateItems();
+    } catch (err) {
+      console.error('Error syncing saved list:', err);
+    }
   }
 }
 

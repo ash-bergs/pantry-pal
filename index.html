@@ -41,7 +41,7 @@
         <div class="modal-content">
           <button id="closeModal" class="close" aria-label="Close">&times;</button>
           <h2 id="modalTitle">Add New Item</h2>
-          <form id="itemForm" novalidate>
+          <form id="addItemForm" novalidate>
             <label for="nameInput">
               Item
               <input
@@ -99,8 +99,7 @@
     </div>
 
     <!-- FILTERS AND OPTIONS SIDEBAR -->
-     <div id="optionsModal" class="optionsModal" role="dialog" aria-labelledby="optionsModalTitle" aria-modal="true" aria-hidden="true" >
-       
+    <div id="optionsModal" class="optionsModal" role="dialog" aria-labelledby="optionsModalTitle" aria-modal="true" aria-hidden="true" >
       <div class="optionsSettingsContainer">
         <div class="optionsModalTitleContainer">
         <h2 class="optionsModalTitle">Settings</h2>
@@ -142,14 +141,24 @@
           <span class="switch-handle"></span>
         </label>
       </div>
-       
       </div>
 
-       <div class="optionsModalFooter">
-       <button id="backupData" class="downloadDataButton">Download</button>
-       </div>
-       </div>
-     </div>
+      <div class="optionsModalFooter">
+      <button id="backupData" class="downloadDataButton">Download</button>
+
+      <div class="uploadBackupArea">
+      <form id="uploadBackupForm">
+        <label class="fileInputLabel" for="backupFileInput">
+        <input type="file" id="backupFileInput" accept="application/json" />
+        </label>
+        <button class="uploadBackupButton" type="submit">Upload</button>
+        <!-- <div id="spinner">Loading...</div> -->
+      </form>
+      </div>
+
+      </div>
+      </div>
+    </div>
 
     <!-- SHOPPING ITEMS LIST -->
     <ul id="itemsDiv"></ul>

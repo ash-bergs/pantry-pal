@@ -48,6 +48,11 @@
   justify-content: space-between;
 }
 
+.optionsSettingsContainer {
+  height: 100%;
+  position: relative;
+}
+
 .optionsModalFooter {
   padding: 1rem;
 }
@@ -65,4 +70,15 @@
   justify-content: center;
   align-items: center;
   gap: 0.3rem;
+}
+
+.uploadBackupArea {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  bottom: 0;
+  right: 0;
 }
