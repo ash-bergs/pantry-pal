@@ -1,15 +1,15 @@
-#itemForm {
+#addItemForm {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-#itemForm label {
+#addItemForm label {
   display: block;
   margin-bottom: 1rem;
   font-size: 20px;
 }
 
-#itemForm input,
+#addItemForm input,
 select {
   display: block;
   height: 2.5rem;
@@ -26,15 +26,15 @@ select {
   gap: 2rem;
 }
 
-#itemForm input:invalid {
+#addItemForm input:invalid {
   outline: 1px solid var(--button-hover-bg-color);
 }
 
-#itemForm input:focus-visible {
+#addItemForm input:focus-visible {
   outline: 1px solid var(--nav-bg-color);
 }
 
-#itemForm select:focus-visible {
+#addItemForm select:focus-visible {
   outline: 1px solid var(--nav-bg-color);
 }
 
@@ -49,4 +49,56 @@ select {
   letter-spacing: 0.03rem;
   line-height: 2rem;
   color: var(--button-hover-bg-color);
+}
+
+#uploadBackupForm {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/*TODO: implement custom upload area */
+/* input[type='file'] {
+  display: none;
+} */
+
+.fileInputLabel {
+  display: block;
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  display: block;
+  padding: 1.6rem;
+  background: #eaeaea;
+  text-align: center;
+  font-style: italic;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--heading-font-family);
+  margin-bottom: 1rem;
+  color: rgb(122, 121, 121);
+}
+
+/*Spinner stuff - should prly get its own module when implemented */
+#spinner {
+  display: none;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#spinner::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

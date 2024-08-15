@@ -1,5 +1,5 @@
 import {
-  itemForm,
+  addItemForm,
   clearFormButton,
   nameInput,
   nameError,
@@ -19,7 +19,7 @@ import {
 export const clearForm = () => {
   clearNameErrors();
   clearPriceErrors();
-  itemForm.reset();
+  addItemForm.reset();
   nameInput?.focus(); // return focus to the top form input
 };
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-itemForm.onsubmit = async (event) => {
+addItemForm.onsubmit = async (event) => {
   event.preventDefault();
 
   if (
@@ -89,7 +89,7 @@ itemForm.onsubmit = async (event) => {
     section
   );
 
-  itemForm?.reset();
+  addItemForm?.reset();
   nameInput?.focus();
 };
 

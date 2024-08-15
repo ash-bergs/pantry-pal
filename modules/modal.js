@@ -1,4 +1,4 @@
-import { itemForm } from './domElements.ts';
+import { addItemForm } from './domElements.ts';
 
 // get modal and focusable elements
 export const addModal = document.getElementById('modal');
@@ -36,7 +36,7 @@ export const hideAddFormModal = () => {
   addModal.setAttribute('aria-hidden', 'true');
   setInert(false);
   openModalButton.focus();
-  itemForm.reset();
+  addItemForm.reset();
 };
 
 // Trap focus inside the modal
