@@ -1,6 +1,6 @@
 import { backupFileInput, uploadBackupForm } from './domElements';
 import { itemManager } from './itemManager';
-import { hideOptionsModal } from './optionsModal.js'; //TODO: this should be ts before merge
+import { hideOptionsModal } from './optionsModal';
 
 uploadBackupForm.onsubmit = async (event) => {
   event.preventDefault();

@@ -13,7 +13,7 @@ import './modules/addItemform';
 import './modules/uploadBackupForm';
 import './modules/modal.js';
 import './modules/optionsData.js';
-import './modules/optionsModal.js';
+import './modules/optionsModal';
 
 import { itemManager } from './modules/itemManager';
 import { exportDb } from './modules/exportDb';
