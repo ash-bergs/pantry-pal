@@ -40,9 +40,12 @@ To handle bundling in the Github Pages deploy another branch was set up, `gh-pag
 
 ### 1.2 (currently working)
 
+- Implements Typescript
 - Download current shopping list
 - Upload a shopping list file
 - Resetting app (service worker and db contents) elegantly when deployed
+
+Now that we're bundling, and the code base continues to grow, it was time to add TypeScript. This probably should have been done sooner, but moving the codebase over to ts wasn't too painful, and having it in place will help us avoid developer-introduced bugs.
 
 ### Design
 
