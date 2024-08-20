@@ -1,5 +1,5 @@
 :root {
-  --main-bg-color: white;
+  --main-bg-color: #e4e4e4;
   --nav-bg-color: #2bc1ff;
   --background-blue-alternate: rgba(51, 167, 255, 0.5);
   --nav-text-color: #fff;
@@ -16,6 +16,9 @@
   --drawer-shadow: rgba(50, 50, 93, 0.25) 0px 25px 25px 6px,
     rgba(0, 0, 0, 0.5) 0px 3px 4px 1px;
   --heading-font-family: 'Urbanist', sans-serif;
+
+  --primary-green: #2fb156;
+  --dark-grey: #828282;
 }
 
 html {
@@ -78,7 +81,7 @@ body {
 
 .plus {
   --b: 4px; /* thickness*/
-  --c: #fff 90deg, var(--nav-bg-color) 0; /* coloration */
+  --c: #fff 90deg, var(--primary-green) 0; /* coloration */
   border: 5px solid #fff;
   border-radius: 50%;
   width: 25px; /* size */

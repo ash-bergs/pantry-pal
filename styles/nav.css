@@ -1,8 +1,7 @@
 nav {
-  background: var(--nav-bg-color);
   letter-spacing: 0.2rem;
   line-height: 3rem;
-  color: var(--nav-text-color);
+  background-color: white;
   padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 0.7rem;
@@ -10,7 +9,6 @@ nav {
   font-family: var(--heading-font-family);
   font-size: 24px;
   font-weight: 800;
-  text-shadow: var(--text-shadow-large);
   box-shadow: var(--button-shadow);
   position: fixed;
   top: 0;

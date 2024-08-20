@@ -26,28 +26,15 @@ export const renderItemsList = (items: Item[]) => {
         <div class="itemInfo">
           <div class="itemNameContainer">
             <div>
-              <p class="itemInfoHeading">Item</p>
+              <p class="itemInfoHeading storeSection">${
+                item.section ? item.section : 'other'
+              }</p>
               <p class="itemNameText" id="item-name-${item.id}">${item.name}</p>
             </div>
-            <p class="itemInfoHeading storeSection">${
-              item.section || 'Other'
-            }</p>
+            <p class="itemAmountSection">${item.quantity || 'N/A'} ${
+        item.quantityUnit
+      }</p>
           </div>
-
-          <div class="itemQuantityContainer">
-            <p class="itemInfoHeading">Quantity</p>
-            <p class="itemQuantityText" id="item-quantity-${item.id}">${
-        item.quantity
-      } ${item.quantityUnit}</p>
-          </div>
-
-          <div class="itemPriceContainer">
-            <p class="itemInfoHeading">Est. Price</p>
-            <p class="itemPriceText" id="item-price-${item.id}">$ ${Number(
-        item.price
-      ).toFixed(2)} </p>
-          </div>
-
         </div>
 
         <button
