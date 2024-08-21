@@ -22,7 +22,6 @@ window.toggleItemPurchaseStatus =
   itemManager.toggleItemPurchaseStatus.bind(itemManager);
 window.removeItem = itemManager.removeItem.bind(itemManager);
 window.populateItems = itemManager.populateItems.bind(itemManager);
-window.filterBySection = itemManager.filterBySection.bind(itemManager);
 
 // get download button and add action
 const downloadButton = document.getElementById('backupData');

@@ -6,7 +6,6 @@ nav {
   padding-right: 2rem;
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
-  font-family: var(--heading-font-family);
   font-size: 24px;
   font-weight: 800;
   box-shadow: var(--button-shadow);

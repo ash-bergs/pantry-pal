@@ -20,7 +20,6 @@
   grid-template-columns: min-content 1fr min-content;
   border-bottom: 1px solid #cdcccb;
   background: white;
-  margin-bottom: 0.5rem;
   font-size: 20px;
   width: 85%;
   margin: 0 auto;
@@ -76,21 +75,38 @@
   font-size: 18px;
 }
 
-.deleteButton {
-  margin: 0 0 0 auto;
-  background: var(--button-hover-bg-color);
+.itemActions {
+  display: flex;
+  flex-direction: column;
+}
+
+.deleteButton,
+.editButton {
   color: var(--button-text-color);
   font-size: 0.8rem;
   width: 4rem;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+  height: 100%;
 }
 
-.deleteButton:active {
-  margin-top: 3px;
+.deleteButton {
+  background: var(--button-hover-bg-color);
+  color: var(--secondary-red);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 0px;
 }
+
+.editButton {
+  background-color: #7eff9a;
+  color: var(--secondary-green);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 8px;
+}
+
+/* .deleteButton:active {
+  margin-top: 3px;
+} */
 
 .purchased {
   background: #b4b8b4;
@@ -144,6 +160,7 @@
 }
 
 .itemGroupContainer {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -171,9 +188,9 @@
 }
 
 .completed {
-  background-color: var(--button-bg-color);
+  background-color: var(--primary-green);
 }
 
 .selected {
-  outline: 3px dashed var(--nav-bg-color);
+  background-color: var(--nav-bg-color);
 }

@@ -1,5 +1,6 @@
 import { Item } from './db';
 import { itemsDiv, stickyQuickSortFooter, quickSortDiv } from './domElements';
+import { itemManager } from './itemManager';
 
 export const renderItemsList = (items: Item[]) => {
   if (!itemsDiv) {
@@ -37,6 +38,7 @@ export const renderItemsList = (items: Item[]) => {
           </div>
         </div>
 
+        <div class="itemActions">
         <button
         onclick="removeItem(${item.id})"
         class="deleteButton"
@@ -44,6 +46,15 @@ export const renderItemsList = (items: Item[]) => {
         >
         X
         </button>
+
+        <button
+        class="editButton"
+        aria-label="Edit ${item.name}"
+        >
+        Edit
+        </button>
+      </div>
+
       </div>
     `
     )
@@ -65,7 +76,7 @@ export const renderSectionBubbles = (
     .sort()
     .map(
       (section: any) => `
-      <div class="itemGroupContainer" onclick="filterBySection('${section}')">
+      <div class="itemGroupContainer" onclick="handleSectionClick(event, '${section}')">
         <div class="itemGroup ${section === selectedSection ? 'selected' : ''}
         ${
           storeSectionData[section].isPurchased ===
@@ -84,6 +95,14 @@ export const renderSectionBubbles = (
     )
     .join('');
 };
+
+// handle the click for section bubbles (on true mobile device this causes the numbers to be highlighted? trying e.preventDefault)
+const handleSectionClick = (event: Event, section: string) => {
+  event.preventDefault();
+  itemManager.filterBySection(section);
+};
+
+window.handleSectionClick = handleSectionClick;
 
 // helper for section bubbles in footer
 const capitalizeFirstLetter = (string: string) => {
