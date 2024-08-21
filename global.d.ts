@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    filterBySection: (section: any) => void;
+    handleSectionClick: (event: Event, section: any) => void;
     toggleItemPurchaseStatus: (event: Event, id: number) => Promise<void>;
     removeItem: (id: number) => Promise<void>;
     populateItems: () => Promise<void>;

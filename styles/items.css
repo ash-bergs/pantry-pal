@@ -9,56 +9,58 @@
 }
 
 #itemsDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin-bottom: 20rem; /* spacing so items dont get lost under sticky footer*/
 }
 
 .item {
   display: grid;
-  grid-template-columns: min-content 2fr 1fr;
+  grid-template-columns: min-content 1fr min-content;
   border-bottom: 1px solid #cdcccb;
-  background: var(--item-bg-color);
-  margin-bottom: 0.5rem;
+  background: white;
   font-size: 20px;
   width: 85%;
   margin: 0 auto;
+  border-radius: 8px;
 }
 
 .checkbox {
   height: 100%;
   width: 2rem;
-  margin-left: 0.5rem;
+  margin-left: 1rem;
 }
 
-/* container for an item in the rendered shopping list */
 .itemInfo {
-  display: grid;
-  grid-template-areas:
-    'name name'
-    'quantity price';
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr min-content;
-  gap: 0.7rem;
-  padding-left: 1rem;
   color: var(--text-color);
-  padding-top: 0.5rem;
-  padding-bottom: 0.2rem;
+  padding: 1rem;
 }
 
 .itemInfoHeading {
-  font-size: 14px;
+  font-size: 16px;
   font-style: italic;
   letter-spacing: 0.05rem;
 }
 
+.itemAmountSection {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 18px;
+  letter-spacing: 0.05rem;
+}
+
 .storeSection {
-  text-align: right;
+  color: #8d8d8d;
 }
 
 .itemNameContainer {
+  position: relative;
   grid-area: name;
   font-size: 22px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 
 .itemNameText {
@@ -76,29 +78,41 @@
   font-size: 18px;
 }
 
-.itemPriceContainer {
-  grid-area: price;
+.itemActions {
+  display: flex;
+  flex-direction: column;
 }
 
-.itemPriceText {
-  font-size: 16px;
-}
-
-.deleteButton {
-  margin: 0 0 0 auto;
-  background: var(--button-hover-bg-color);
+.deleteButton,
+.editButton {
   color: var(--button-text-color);
   font-size: 0.8rem;
   width: 4rem;
-  border-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  height: 100%;
 }
 
-.deleteButton:active {
-  margin-top: 3px;
+.deleteButton {
+  background: var(--button-hover-bg-color);
+  color: var(--secondary-red);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 0px;
 }
+
+.editButton {
+  background-color: #7eff9a;
+  color: var(--secondary-green);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 8px;
+}
+
+/* .deleteButton:active {
+  margin-top: 3px;
+} */
 
 .purchased {
-  background: #878e88;
+  background: #b4b8b4;
   color: #fff;
 }
 
@@ -149,6 +163,7 @@
 }
 
 .itemGroupContainer {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -162,7 +177,7 @@
 }
 
 .itemGroup {
-  background: var(--nav-bg-color);
+  background: var(--dark-grey);
   display: flex;
   gap: 0.2rem;
   justify-content: center;
@@ -176,9 +191,9 @@
 }
 
 .completed {
-  background-color: var(--button-bg-color);
+  background-color: var(--primary-green);
 }
 
 .selected {
-  outline: 3px dashed var(--nav-bg-color);
+  background-color: var(--nav-bg-color);
 }

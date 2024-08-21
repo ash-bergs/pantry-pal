@@ -1,5 +1,6 @@
 import { Item } from './db';
 import { itemsDiv, stickyQuickSortFooter, quickSortDiv } from './domElements';
+import { itemManager } from './itemManager';
 
 export const renderItemsList = (items: Item[]) => {
   if (!itemsDiv) {
@@ -26,30 +27,18 @@ export const renderItemsList = (items: Item[]) => {
         <div class="itemInfo">
           <div class="itemNameContainer">
             <div>
-              <p class="itemInfoHeading">Item</p>
+              <p class="itemInfoHeading storeSection">${
+                item.section ? item.section : 'other'
+              }</p>
               <p class="itemNameText" id="item-name-${item.id}">${item.name}</p>
             </div>
-            <p class="itemInfoHeading storeSection">${
-              item.section || 'Other'
-            }</p>
+            <p class="itemAmountSection">${item.quantity || 'N/A'} ${
+        item.quantityUnit
+      }</p>
           </div>
-
-          <div class="itemQuantityContainer">
-            <p class="itemInfoHeading">Quantity</p>
-            <p class="itemQuantityText" id="item-quantity-${item.id}">${
-        item.quantity
-      } ${item.quantityUnit}</p>
-          </div>
-
-          <div class="itemPriceContainer">
-            <p class="itemInfoHeading">Est. Price</p>
-            <p class="itemPriceText" id="item-price-${item.id}">$ ${Number(
-        item.price
-      ).toFixed(2)} </p>
-          </div>
-
         </div>
 
+        <div class="itemActions">
         <button
         onclick="removeItem(${item.id})"
         class="deleteButton"
@@ -57,6 +46,15 @@ export const renderItemsList = (items: Item[]) => {
         >
         X
         </button>
+
+        <button
+        class="editButton"
+        aria-label="Edit ${item.name}"
+        >
+        Edit
+        </button>
+      </div>
+
       </div>
     `
     )
@@ -78,7 +76,7 @@ export const renderSectionBubbles = (
     .sort()
     .map(
       (section: any) => `
-      <div class="itemGroupContainer" onclick="filterBySection('${section}')">
+      <div class="itemGroupContainer" onclick="handleSectionClick(event, '${section}')">
         <div class="itemGroup ${section === selectedSection ? 'selected' : ''}
         ${
           storeSectionData[section].isPurchased ===
@@ -97,6 +95,14 @@ export const renderSectionBubbles = (
     )
     .join('');
 };
+
+// handle the click for section bubbles (on true mobile device this causes the numbers to be highlighted? trying e.preventDefault)
+const handleSectionClick = (event: Event, section: string) => {
+  event.preventDefault();
+  itemManager.filterBySection(section);
+};
+
+window.handleSectionClick = handleSectionClick;
 
 // helper for section bubbles in footer
 const capitalizeFirstLetter = (string: string) => {

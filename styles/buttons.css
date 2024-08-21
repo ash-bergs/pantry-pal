@@ -26,7 +26,7 @@ button:active {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  background: var(--nav-bg-color);
+  background: var(--primary-green);
   font-family: var(--heading-font-family);
   width: auto;
 }
