@@ -44,7 +44,9 @@
 }
 
 .itemAmountSection {
-  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
   font-size: 18px;
   letter-spacing: 0.05rem;
 }
@@ -54,10 +56,11 @@
 }
 
 .itemNameContainer {
+  position: relative;
   grid-area: name;
   font-size: 22px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 
 .itemNameText {
