@@ -1,4 +1,5 @@
-.modal {
+.modal,
+.listModal {
   display: none;
   position: fixed;
   z-index: 3;
@@ -10,7 +11,8 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+.modal-content,
+.addListModalContent {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 2rem;
@@ -21,7 +23,8 @@
 }
 
 @media (max-width: 600px) {
-  .modal-content {
+  .modal-content,
+  .addListModalContent {
     margin: 25% auto;
   }
 }
@@ -50,7 +53,8 @@
   user-select: none;
 }
 
-#modalTitle {
+#modalTitle,
+#addListModalTitle {
   font-family: var(--heading-font-family);
   padding-top: 1rem;
   font-size: 24px;

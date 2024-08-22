@@ -15,6 +15,8 @@ import './modules/uploadBackupForm';
 import './modules/modal.js';
 import './modules/optionsData.js';
 import './modules/optionsModal';
+import './modules/addListModal';
+import './modules/addListForm';
 
 import { itemManager } from './modules/itemManager';
 import { exportDb } from './modules/exportDb';

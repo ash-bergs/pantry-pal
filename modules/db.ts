@@ -11,9 +11,27 @@ export interface Item {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface List {
+  id?: number;
+  name: string;
+  isActive?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+// join table for relationship (many to many) between item and list
+export interface ItemList {
+  id?: number;
+  itemId: number;
+  listId: number;
+}
+
 // class created to inform TS about our DB structure
 class PantryPalDatabase extends Dexie {
   items!: Table<Item, number>;
+  lists!: Table<List, number>;
+  itemLists!: Table<ItemList, number>;
 
   constructor() {
     super('pantry-pal');
@@ -24,6 +42,11 @@ class PantryPalDatabase extends Dexie {
     this.version(2).stores({
       items:
         '++id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
+    });
+
+    this.version(3).stores({
+      lists: '++id, name, isActive, createdAd, updatedAt',
+      itemLists: '++id, itemId, listId',
     });
   }
 }
@@ -49,9 +72,8 @@ const timestampsMiddleware = {
           ...downlevelTable,
           // when mutating, determine if create/update
           mutate: async (req: DBCoreMutateRequest) => {
-            if (tableName === 'items') {
-              const now = new Date().toISOString();
-
+            const now = new Date().toISOString();
+            if (tableName === 'items' || tableName === 'lists') {
               if (req.type === 'add') {
                 req.values.forEach((item) => {
                   item.createdAt = now;

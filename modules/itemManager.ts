@@ -142,6 +142,10 @@ class ItemManager {
     await this.populateItems();
   }
 
+  async addList(name: string) {
+    await db.lists.add({ name });
+  }
+
   async removeItem(id: number) {
     if (this.selectedSection) {
       const itemToRm = await db.items.get(id);

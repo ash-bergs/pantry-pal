@@ -5,11 +5,19 @@ export const addItemForm = document.getElementById(
   'addItemForm'
 ) as HTMLFormElement;
 export const clearFormButton = document.getElementById('cancelButton');
+// LIST FORM
+export const addListForm = document.getElementById(
+  'addListForm'
+) as HTMLFormElement;
+export const clearListFormButton = document.getElementById(
+  'cancelAddListButton'
+);
 /* ------------------- ADD ITEM FORM INPUTS AND ERR MSG CONTAINERS ------------------- */
 export const nameInput = document.getElementById(
   'nameInput'
 ) as HTMLInputElement;
 export const nameError = document.getElementById('nameError');
+export const listNameError = document.getElementById('listNameError');
 export const priceInput = document.getElementById(
   'priceInput'
 ) as HTMLInputElement;
@@ -27,6 +35,10 @@ export const showItemsControlContainer =
   document.getElementById('showItemsControl');
 export const toggleMessage = document.getElementById('toggleMessage');
 export const toggleArrow = document.getElementById('arrow');
+/* -------------------------- ADD LIST FORM INPUTS -------------------------- */
+export const listNameInput = document.getElementById(
+  'listNameInput'
+) as HTMLInputElement;
 /* ---------------------------- UPLOAD FORM \ INPUT --------------------------- */
 export const uploadBackupForm = document.getElementById(
   'uploadBackupForm'
