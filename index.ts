@@ -6,6 +6,7 @@ import './styles/modal.css';
 import './styles/form.css';
 import './styles/switch.css';
 import './styles/optionsModal.css';
+import './styles/landing.css';
 import './modules/db';
 import './modules/domElements';
 import './modules/domUtils';
