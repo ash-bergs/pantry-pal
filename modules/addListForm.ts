@@ -4,7 +4,7 @@ import {
   listNameInput,
   listNameError,
 } from './domElements';
-import { itemManager } from './itemManager';
+import { listManager } from './ListManager';
 
 export const clearForm = () => {
   clearNameErrors();
@@ -38,7 +38,7 @@ addListForm.onsubmit = async (event) => {
 
   const name = listNameInput.value;
 
-  await itemManager.addList(name);
+  await listManager.addList(name);
 
   addListForm?.reset();
   listNameInput?.focus();

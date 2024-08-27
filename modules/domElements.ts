@@ -1,4 +1,5 @@
 export const itemsDiv = document.getElementById('itemsDiv');
+export const listsDiv = document.getElementById('listsDiv');
 
 /* ---------------------------------- FORM ---------------------------------- */
 export const addItemForm = document.getElementById(

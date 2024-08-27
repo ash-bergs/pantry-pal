@@ -1,0 +1,6 @@
+#listsDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 20rem; /* spacing so items dont get lost under sticky footer*/
+}

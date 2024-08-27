@@ -1,10 +1,15 @@
-import { Item } from './db';
-import { itemsDiv, stickyQuickSortFooter, quickSortDiv } from './domElements';
+import { Item, List } from './db';
+import {
+  itemsDiv,
+  listsDiv,
+  stickyQuickSortFooter,
+  quickSortDiv,
+} from './domElements';
 import { itemManager } from './itemManager';
 
 export const renderItemsList = (items: Item[]) => {
   if (!itemsDiv) {
-    console.error('Missing required DOM elements');
+    console.error('Missing required itemsDiv DOM element');
     return;
   }
 
@@ -66,7 +71,7 @@ export const renderSectionBubbles = (
   selectedSection: string | null
 ) => {
   if (!quickSortDiv || !stickyQuickSortFooter) {
-    console.error('Missing required DOM elements');
+    console.error('Missing required sticky sort footer DOM elements');
     return;
   }
 
@@ -122,4 +127,24 @@ export const noItemsMessage = () => {
     </div>
   `;
   stickyQuickSortFooter.classList.add('closed');
+};
+
+/* ------------------------------- LISTS SETUP ------------------------------ */
+// probably want to better name this module, and split based on items/lists
+
+export const renderLists = (lists: List[]) => {
+  if (!listsDiv) {
+    console.error('Missing required listsDiv DOM element');
+    return;
+  }
+
+  listsDiv.innerHTML = lists
+    .map(
+      (list) => `
+        <div class="listSelection">
+          <h2>${list.name}</h2>
+        </div>
+      `
+    )
+    .join('');
 };

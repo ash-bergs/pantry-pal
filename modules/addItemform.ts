@@ -3,8 +3,8 @@ import {
   clearFormButton,
   nameInput,
   nameError,
-  priceInput,
-  priceError,
+  // priceInput,
+  // priceError,
   quantityInput,
   quantityUnitSelect,
   sectionSelect,
@@ -18,7 +18,7 @@ import {
 
 export const clearForm = () => {
   clearNameErrors();
-  clearPriceErrors();
+  // clearPriceErrors();
   addItemForm.reset();
   nameInput?.focus(); // return focus to the top form input
 };
@@ -29,11 +29,11 @@ export const clearNameErrors = () => {
   nameError.textContent = '';
 };
 
-export const clearPriceErrors = () => {
-  priceInput.setCustomValidity('');
-  if (!priceError) return;
-  priceError.textContent = '';
-};
+// export const clearPriceErrors = () => {
+//   priceInput.setCustomValidity('');
+//   if (!priceError) return;
+//   priceError.textContent = '';
+// };
 
 // generate the options in section and quantity unit selects
 document.addEventListener('DOMContentLoaded', () => {
@@ -51,8 +51,8 @@ addItemForm.onsubmit = async (event) => {
   if (
     !nameInput ||
     !nameError ||
-    !priceInput ||
-    !priceError ||
+    // !priceInput ||
+    // !priceError ||
     !sectionSelect ||
     !quantityUnitSelect
   ) {
@@ -67,18 +67,18 @@ addItemForm.onsubmit = async (event) => {
     nameError.textContent = nameInput.validationMessage;
     valid = false;
   }
-  if (!priceInput.validity.valid) {
-    priceInput.setCustomValidity('Please enter a valid price (e.g. $1.99)');
-    priceError.textContent = priceInput.validationMessage;
-    valid = false;
-  }
+  // if (!priceInput.validity.valid) {
+  //   priceInput.setCustomValidity('Please enter a valid price (e.g. $1.99)');
+  //   priceError.textContent = priceInput.validationMessage;
+  //   valid = false;
+  // }
 
   if (!valid) return;
 
   const name = nameInput.value;
   const quantity = quantityInput.value;
   const quantityUnit = quantityUnitSelect.value;
-  const price = priceInput.value;
+  const price = 0; // TODO PRICE
   const section = sectionSelect.value;
 
   await itemManager.addItem(
@@ -95,4 +95,4 @@ addItemForm.onsubmit = async (event) => {
 
 clearFormButton?.addEventListener('click', clearForm);
 nameInput?.addEventListener('input', clearNameErrors);
-priceInput?.addEventListener('input', clearPriceErrors);
+// priceInput?.addEventListener('input', clearPriceErrors);
