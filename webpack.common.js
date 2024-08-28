@@ -3,9 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './index.ts',
+  entry: {
+    index: './modules/index.ts', // Existing entry for index.html
+    // list: './modules/list.ts', // TODO: entry for List.html
+  },
   output: {
-    filename: 'index.js',
+    filename: '[name].js', // [name] placeholder will generate index.js and list.js
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
@@ -38,10 +41,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './index.html',
+      chunks: ['index'], // Only include index.js in index.html
     }),
     new HtmlWebpackPlugin({
       filename: 'about.html',
       template: './about.html',
+      chunks: ['index'],
     }),
     new CopyWebpackPlugin({
       patterns: [

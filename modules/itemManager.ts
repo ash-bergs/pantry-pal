@@ -135,7 +135,7 @@ class ItemManager {
     name: string,
     quantity: number,
     quantityUnit: string,
-    price: number,
+    price: number = 0,
     section: string
   ) {
     await db.items.add({ name, quantity, quantityUnit, price, section });

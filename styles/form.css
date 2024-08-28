@@ -1,16 +1,20 @@
-#addItemForm {
+#addItemForm,
+#addListForm {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-#addItemForm label {
+#addItemForm label,
+#addListForm label {
   display: block;
   margin-bottom: 1rem;
   font-size: 20px;
 }
 
 #addItemForm input,
-select {
+#addItemForm select,
+#addListForm input,
+#addListForm select {
   display: block;
   height: 2.5rem;
   font-size: 20px;
@@ -19,22 +23,24 @@ select {
   margin-top: 0.5rem;
   width: 100%;
 }
-
 .formInputGroup {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
-#addItemForm input:invalid {
+#addItemForm input:invalid,
+#addListForm input:invalid {
   outline: 1px solid var(--button-hover-bg-color);
 }
 
-#addItemForm input:focus-visible {
+#addItemForm input:focus-visible,
+#addListForm input:focus-visible {
   outline: 1px solid var(--nav-bg-color);
 }
 
-#addItemForm select:focus-visible {
+#addItemForm select:focus-visible,
+#addListForm select:focus-visible {
   outline: 1px solid var(--nav-bg-color);
 }
 

@@ -6,6 +6,18 @@
   padding-top: 2rem;
 }
 
+/* container for the two "add item/list" modal buttons, we need a better place for these*/
+.openModalButtonContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .openModalButtonContainer {
+    flex-direction: column;
+  }
+}
+
 button {
   border: none;
   border-radius: 8px;
@@ -22,7 +34,7 @@ button:active {
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
-#openModalButton {
+.openModalButton {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
@@ -51,17 +63,16 @@ button:active {
 }
 
 @media (max-width: 600px) {
-  #openModalButton {
+  .openModalButton {
     width: 100%;
   }
 }
 
-#addItemButton {
+.addButton {
   background: var(--button-bg-color);
 }
 
-#cancelButton,
-#closeOptionsModal {
+.cancelButton {
   color: #fff;
   background: var(--button-hover-bg-color);
 }
