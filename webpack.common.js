@@ -5,10 +5,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     index: './modules/index.ts', // Existing entry for index.html
-    // list: './modules/list.ts', // TODO: entry for List.html
+    list: './modules/list.ts', //
   },
   output: {
-    filename: '[name].js', // [name] placeholder will generate index.js and list.js
+    filename: '[name].js', // [name] placeholder will generate index.js and list.js - https://webpack.js.org/configuration/output/
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
@@ -41,12 +41,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './index.html',
-      chunks: ['index'], // Only include index.js in index.html
+      chunks: ['index'],
     }),
     new HtmlWebpackPlugin({
       filename: 'about.html',
       template: './about.html',
       chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'list.html',
+      template: './list.html',
+      chunks: ['list'],
     }),
     new CopyWebpackPlugin({
       patterns: [
