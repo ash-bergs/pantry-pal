@@ -33,3 +33,5 @@ downloadButton?.addEventListener('click', exportDb);
 
 // call populate to load shopping list items
 window.onload = window.populateItems;
+
+// This should actually be the /list page JS

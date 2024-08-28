@@ -26,9 +26,7 @@ export const setInert = (state: any) => {
 };
 
 export const showModal = () => {
-  console.log('show list modal');
   if (!addModal || !firstFocusableElement) return;
-  console.log(addModal);
   addModal.classList.add('open');
   addModal.style.display = 'block';
   addModal.setAttribute('aria-hidden', 'false');
