@@ -141,9 +141,11 @@ export const renderLists = (lists: List[]) => {
   listsDiv.innerHTML = lists
     .map(
       (list) => `
-        <div class="listSelection">
+      <a class="listLink" href="list.html?id=${list.id}">
+        <li class="listSelection">
           <h2>${list.name}</h2>
-        </div>
+        </li>
+        </a>
       `
     )
     .join('');

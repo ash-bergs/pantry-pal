@@ -1,6 +1,24 @@
 #listsDiv {
+  padding-left: 6rem;
+  padding-right: 6rem;
+  list-style-type: none;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 20rem; /* spacing so items dont get lost under sticky footer*/
+}
+
+.listSelection {
+  box-shadow: var(--button-shadow);
+  border-radius: 8px;
+  padding: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  cursor: pointer;
+  font-family: var(--heading-font-family);
+  background: white;
+  color: var(--text-color);
+}
+
+.listLink {
+  text-decoration: none;
 }
