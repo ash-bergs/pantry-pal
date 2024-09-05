@@ -16,6 +16,10 @@ import {
   createOptions,
 } from './optionsData.js';
 
+// get the URL search param -> ?=LIST_ID
+const urlSearchParams = new URLSearchParams(window.location.search);
+const currentListId = urlSearchParams.get('id');
+
 export const clearForm = () => {
   clearNameErrors();
   // clearPriceErrors();

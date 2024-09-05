@@ -20,6 +20,18 @@ import './optionsModal';
 import { itemManager } from './itemManager';
 import { exportDb } from './exportDb';
 
+// get the URL search param -> ?=LIST_ID
+const urlSearchParams = new URLSearchParams(window.location.search);
+const currentListId = urlSearchParams.get('id');
+
+// Set the listId in the ItemManager as local state - easier to avoid passing around an arg
+if (currentListId) {
+  itemManager.setListId(parseInt(currentListId, 10));
+} else {
+  // If no listId is present, set it to null to handle all items
+  itemManager.setListId(null);
+}
+
 window.toggleItemPurchaseStatus =
   itemManager.toggleItemPurchaseStatus.bind(itemManager);
 window.removeItem = itemManager.removeItem.bind(itemManager);
