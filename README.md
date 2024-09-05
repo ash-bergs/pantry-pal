@@ -38,14 +38,21 @@ This move made it easier for the developer to read and understand the project’
 
 To handle bundling in the Github Pages deploy another branch was set up, `gh-pages`, and a workflow was introduced to the project that’s responsible for compiling the project code and outputting to the gh-pages branch on deploy.
 
-### 1.2 (currently working)
+### 1.2
 
 - Implements Typescript
 - Download current shopping list
 - Upload a shopping list file
 - Resetting app (service worker and db contents) elegantly when deployed
 
-Now that we're bundling, and the code base continues to grow, it was time to add TypeScript. This probably should have been done sooner, but moving the codebase over to ts wasn't too painful, and having it in place will help us avoid developer-introduced bugs.
+Now that we're bundling, and the code base continues to grow, it was time to add TypeScript. This probably should have been done sooner, but moving the codebase over to TS wasn't too painful, and having it in place will help us avoid developer-introduced bugs.
+
+### 1.3 (currently working)
+
+- Introduces Lists and user Pantry
+- Adds enhanced caching of lists
+- Adds user reminders for fresh food items, if reminders have been turned on in settings
+- ☝️ On that note, enhanced user settings and settings persistance
 
 ### Design
 
