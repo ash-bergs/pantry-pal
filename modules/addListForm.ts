@@ -5,6 +5,7 @@ import {
   listNameError,
 } from './domElements';
 import { listManager } from './ListManager';
+import { hideAddFormModal } from './addListModal';
 
 export const clearForm = () => {
   clearNameErrors();
@@ -41,7 +42,7 @@ addListForm.onsubmit = async (event) => {
   await listManager.addList(name);
 
   addListForm?.reset();
-  listNameInput?.focus();
+  hideAddFormModal();
 };
 
 clearListFormButton?.addEventListener('click', clearForm);
