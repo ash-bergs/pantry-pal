@@ -2,12 +2,17 @@
 
 ### Overview
 
-While building apps with React, Vue, Angular or other libraries is often the go-to move - these libraries, and the frameworks available to them, abstract away the fundamentals. I built Pantry Pal as a way to get back in touch with:
+Pantry Pal was built with the intention of exploring native and low-level options that can be forgotten about while working with modern libraries and tools like React, Vue, Angular, NextJS and more.
+
+In all the project utilizes and explores:
 
 - HTML
-- Javascript
+- JavaScript with TypeScript
 - CSS
-- Bundling (with wepback)
+- Webpack for bundling
+- [IndexDB]()
+- Native APIs like the History API, [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API), and more
+- [Workbox Service Workers](https://developer.chrome.com/docs/workbox)
 
 ## Versions
 
@@ -49,14 +54,13 @@ Now that we're bundling, and the code base continues to grow, it was time to add
 
 ### 1.3 (currently working)
 
-- Introduces Lists and user Pantry
+- Introduces Lists
 - Adds enhanced caching of lists
-- Adds user reminders for fresh food items, if reminders have been turned on in settings
-- ☝️ On that note, enhanced user settings and settings persistance
+- Enhanced user settings and settings persistance
+- Improved routing and page loads
+- Mass list and item actions
+- Improved upload/download
 
 ### Design
 
 Designs in this app have been kept simple - using CSS only for most things (even icons), and all designs are mobile-first.
-
-<img src="./assets/version-1-screenshot.png" alt="mobile screenshot" style="width: 200px; height: auto;">
-<img src="./assets/version-1-screenshot-2.png" alt="mobile screenshot" style="width: 200px; height: auto;">
