@@ -3,6 +3,7 @@ import {
   renderItemsList,
   renderSectionBubbles,
   noItemsMessage,
+  noListMessage,
 } from './domUtils';
 import { autoSort, hideChecked, sectionSort } from './domElements';
 
@@ -18,18 +19,21 @@ type StoreSectionData = {
 //TODO: we could consider further breaking this down, by adding an ItemsService for db interactions
 class ItemManager {
   selectedSection: string | null;
+  currentListId: number | null;
 
   constructor() {
     this.selectedSection = null;
+    this.currentListId = null;
   }
 
   setSelectedSection(section: string | null) {
     this.selectedSection = section;
   }
 
-  private async fetchItems(): Promise<Item[]> {
-    return await db.items.reverse().toArray();
+  setListId(listId: number | null) {
+    this.currentListId = listId;
   }
+
   /** filter items by selected store section or if user has 'hide checked' turned on from options */
   private filterItems = (items: Item[], hideChecked: any) => {
     let filteredItems = items;
@@ -101,9 +105,30 @@ class ItemManager {
     this.populateItems();
   };
 
-  /** Populate the list items in the main view, and the Section bubbles footer */
+  /** Populate items in a specific list */
   async populateItems() {
-    const allListItems = await this.fetchItems();
+    // in reality this function should be able to take 2 paths - drilled down for the list, or for ALL items
+    // which we might support viewing? I'm not sure what the use case would be...
+    const listId = this.currentListId;
+    if (!listId) return;
+    const list = await db.lists.where('id').equals(listId).toArray();
+
+    console.log('fetch lists, list: ', list);
+
+    if (!list.length) return noListMessage();
+
+    // query the join tables for items data
+    const listItems = await db.itemLists
+      .where('listId')
+      .equals(listId)
+      .toArray();
+    const itemIds = listItems.map((item) => item.itemId);
+
+    const allListItems = await db.items
+      .where('id')
+      .anyOf(itemIds)
+      .reverse()
+      .toArray();
 
     if (!allListItems.length) {
       noItemsMessage();
@@ -131,6 +156,7 @@ class ItemManager {
     renderSectionBubbles(storeSectionsAndCounts, this.selectedSection);
   }
 
+  /** Add an item with/without a list */
   async addItem(
     name: string,
     quantity: number,
@@ -138,11 +164,23 @@ class ItemManager {
     price: number = 0,
     section: string
   ) {
-    await db.items.add({ name, quantity, quantityUnit, price, section });
+    const itemId = await db.items.add({
+      name,
+      quantity,
+      quantityUnit,
+      price,
+      section,
+    });
+    const listId = this.currentListId;
+    // add to the join table
+    if (listId) await db.itemLists.add({ itemId, listId });
+
     await this.populateItems();
   }
 
   async removeItem(id: number) {
+    // resetting selected section if we remove the last item in a section
+    // prevents user getting stuck in a selected section w/ no items
     if (this.selectedSection) {
       const itemToRm = await db.items.get(id);
       const isOtherSection =
@@ -160,6 +198,9 @@ class ItemManager {
     }
 
     await db.items.delete(id);
+    // remove from the join table if it exists
+    await db.itemLists.where('itemId').equals(id).delete();
+
     await this.populateItems();
   }
   /** Mark an item as 'in cart' //TODO: update from 'purchased' to 'in cart' */

@@ -12,6 +12,11 @@
   gap: 1rem;
 }
 
+.returnLinkContainer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 @media (max-width: 600px) {
   .openModalButtonContainer {
     flex-direction: column;

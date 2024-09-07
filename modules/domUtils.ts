@@ -129,6 +129,21 @@ export const noItemsMessage = () => {
   stickyQuickSortFooter.classList.add('closed');
 };
 
+export const noListMessage = () => {
+  if (!itemsDiv || !stickyQuickSortFooter) {
+    console.error('Missing required DOM elements');
+    return;
+  }
+
+  itemsDiv.innerHTML = `
+    <div class="noItemsMessage">
+      <p>A list with this ID does not exist, or may have been removed.</p>
+      <p>Please return to the <a href="/index">Dashboard</a>.</p>
+    </div>
+  `;
+  stickyQuickSortFooter.classList.add('closed');
+};
+
 /* ------------------------------- LISTS SETUP ------------------------------ */
 // probably want to better name this module, and split based on items/lists
 
