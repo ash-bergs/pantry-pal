@@ -3,6 +3,7 @@ import {
   renderItemsList,
   renderSectionBubbles,
   noItemsMessage,
+  noListMessage,
 } from './domUtils';
 import { autoSort, hideChecked, sectionSort } from './domElements';
 
@@ -140,6 +141,11 @@ class ItemManager {
     // which we might support viewing? I'm not sure what the use case would be...
     const listId = this.currentListId;
     if (!listId) return;
+    const list = await db.lists.where('id').equals(listId).toArray();
+
+    console.log('fetch lists, list: ', list);
+
+    if (!list.length) return noListMessage();
 
     // query the join tables for items data
     const listItems = await db.itemLists

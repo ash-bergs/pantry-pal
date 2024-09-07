@@ -1,5 +1,5 @@
 import db, { List } from './db';
-import { renderLists } from './domUtils';
+import { renderLists, noListMessage } from './domUtils';
 
 class ListManager {
   selectedListId: number | null;
@@ -31,6 +31,14 @@ class ListManager {
     console.log('calling add list');
     await db.lists.add({ name });
     await this.populateLists();
+  }
+
+  async fetchList(id: number) {
+    const list = await db.lists.where('id').equals(id).toArray();
+
+    console.log('fetch lists, list: ', list);
+
+    if (!list.length) return noListMessage();
   }
 }
 
