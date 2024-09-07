@@ -35,9 +35,6 @@ class ListManager {
 
   async fetchList(id: number) {
     const list = await db.lists.where('id').equals(id).toArray();
-
-    console.log('fetch lists, list: ', list);
-
     if (!list.length) return noListMessage();
   }
 }

@@ -27,10 +27,6 @@ const currentListId = urlSearchParams.get('id');
 
 // Set the listId in the ItemManager as local state - easier to avoid passing around an arg
 if (currentListId) {
-  // check if the list id is a valid list id
-  const test = listManager.fetchList(parseInt(currentListId, 10));
-  console.log('TEST: ', test);
-  // set ItemManager class state
   itemManager.setListId(parseInt(currentListId, 10));
 } else {
   // If no listId is present, set it to null to handle all items

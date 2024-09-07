@@ -105,36 +105,6 @@ class ItemManager {
     this.populateItems();
   };
 
-  /** Populate the list items in the main view, and the Section bubbles footer */
-  // async populateItems() {
-  //   const allListItems = await this.fetchItems();
-
-  //   if (!allListItems.length) {
-  //     noItemsMessage();
-  //     return;
-  //   }
-
-  //   let sortedItems = this.filterItems(allListItems, hideChecked);
-
-  //   // arrange items based on auto sort or section sort
-  //   if (sectionSort && sectionSort.checked) {
-  //     sortedItems = this.sortItemsBySection(sortedItems);
-  //     // if section sort and auto sort is also turned on
-  //     if (autoSort && autoSort.checked) {
-  //       sortedItems = this.sortItemsByPurchaseStatus(sortedItems);
-  //     }
-  //   } else if (autoSort && autoSort.checked) {
-  //     sortedItems = this.sortItemsByPurchaseStatus(sortedItems);
-  //   }
-
-  //   const storeSectionsAndCounts = await this.generateStoreSectionData(
-  //     allListItems
-  //   );
-
-  //   renderItemsList(sortedItems);
-  //   renderSectionBubbles(storeSectionsAndCounts, this.selectedSection);
-  // }
-
   /** Populate items in a specific list */
   async populateItems() {
     // in reality this function should be able to take 2 paths - drilled down for the list, or for ALL items
