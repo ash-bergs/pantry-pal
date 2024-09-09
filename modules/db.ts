@@ -1,7 +1,7 @@
 import Dexie, { DBCore, DBCoreTable, DBCoreMutateRequest, Table } from 'dexie';
 
 export interface Item {
-  id?: number;
+  id?: string;
   name: string;
   price: number;
   isPurchased?: boolean;
@@ -13,7 +13,7 @@ export interface Item {
 }
 
 export interface List {
-  id?: number;
+  id?: string;
   name: string;
   isActive?: boolean;
   createdAt?: string;
@@ -22,7 +22,7 @@ export interface List {
 
 // join table for relationship (many to many) between item and list
 export interface ItemList {
-  id?: number;
+  id?: string;
   itemId: number;
   listId: number;
 }
@@ -123,7 +123,42 @@ const setInitPurchasedMiddleware = {
   },
 };
 
+/** Use Web Crypto API to set ID */
+const uuidMiddleware = {
+  stack: 'dbcore' as const,
+  name: 'uuidMiddleware',
+  create: (downlevelDBCore: DBCore): DBCore => {
+    return {
+      ...downlevelDBCore,
+      table: (tableName: string): DBCoreTable => {
+        const downlevelTable = downlevelDBCore.table(tableName);
+
+        return {
+          ...downlevelTable,
+          mutate: async (req: DBCoreMutateRequest) => {
+            if (
+              tableName === 'items' ||
+              tableName === 'lists' ||
+              tableName === 'itemLists'
+            ) {
+              if (req.type === 'add') {
+                req.values.forEach((item) => {
+                  if (!item.id) {
+                    item.id = crypto.randomUUID();
+                  }
+                });
+              }
+            }
+            return downlevelTable.mutate(req);
+          },
+        };
+      },
+    };
+  },
+};
+
 db.use(timestampsMiddleware);
 db.use(setInitPurchasedMiddleware);
+db.use(uuidMiddleware);
 
 export default db;
