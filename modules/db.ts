@@ -1,7 +1,7 @@
 import Dexie, { DBCore, DBCoreTable, DBCoreMutateRequest, Table } from 'dexie';
 
 export interface Item {
-  id?: number;
+  id?: string;
   name: string;
   price: number;
   isPurchased?: boolean;
@@ -13,7 +13,7 @@ export interface Item {
 }
 
 export interface List {
-  id?: number;
+  id?: string;
   name: string;
   isActive?: boolean;
   createdAt?: string;
@@ -22,16 +22,16 @@ export interface List {
 
 // join table for relationship (many to many) between item and list
 export interface ItemList {
-  id?: number;
-  itemId: number;
-  listId: number;
+  id?: string;
+  itemId: string;
+  listId: string;
 }
 
 // class created to inform TS about our DB structure
 class PantryPalDatabase extends Dexie {
-  items!: Table<Item, number>;
-  lists!: Table<List, number>;
-  itemLists!: Table<ItemList, number>;
+  items!: Table<Item, string>;
+  lists!: Table<List, string>;
+  itemLists!: Table<ItemList, string>;
 
   constructor() {
     super('pantry-pal');
@@ -47,6 +47,14 @@ class PantryPalDatabase extends Dexie {
     this.version(3).stores({
       lists: '++id, name, isActive, createdAd, updatedAt',
       itemLists: '++id, itemId, listId',
+    });
+
+    // use unique string ids instead - &id syntax instead of auto-incrementing ++id
+    this.version(4).stores({
+      items:
+        '&id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
+      lists: '&id, name, isActive, createdAd, updatedAt',
+      itemLists: '&id, itemId, listId',
     });
   }
 }

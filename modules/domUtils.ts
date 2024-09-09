@@ -24,7 +24,7 @@ export const renderItemsList = (items: Item[]) => {
            type="checkbox" 
            id="checkbox-${item.id}"
            class="checkbox" 
-           onchange="toggleItemPurchaseStatus(event, ${item.id})"
+           onchange="toggleItemPurchaseStatus(event, '${item.id}')"
            ${item.isPurchased ? 'checked' : ''}
            aria-labelledby="item-name-${item.id}"
            />
@@ -45,7 +45,7 @@ export const renderItemsList = (items: Item[]) => {
 
         <div class="itemActions">
         <button
-        onclick="removeItem(${item.id})"
+        onclick="removeItem('${item.id}')"
         class="deleteButton"
         aria-label="Remove ${item.name}"
         >
