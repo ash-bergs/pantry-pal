@@ -19,7 +19,7 @@ type StoreSectionData = {
 //TODO: we could consider further breaking this down, by adding an ItemsService for db interactions
 class ItemManager {
   selectedSection: string | null;
-  currentListId: number | null;
+  currentListId: string | null;
 
   constructor() {
     this.selectedSection = null;
@@ -30,7 +30,7 @@ class ItemManager {
     this.selectedSection = section;
   }
 
-  setListId(listId: number | null) {
+  setListId(listId: string | null) {
     this.currentListId = listId;
   }
 
@@ -61,7 +61,7 @@ class ItemManager {
   /** get the other items in the same section and return a count */
   private async countItemsInSection(
     isOtherSection: boolean,
-    id: number
+    id: string
   ): Promise<number> {
     const item = await db.items.get(id);
 
@@ -164,7 +164,9 @@ class ItemManager {
     price: number = 0,
     section: string
   ) {
-    const itemId = await db.items.add({
+    const itemId = crypto.randomUUID();
+    await db.items.add({
+      id: itemId,
       name,
       quantity,
       quantityUnit,
@@ -173,12 +175,13 @@ class ItemManager {
     });
     const listId = this.currentListId;
     // add to the join table
-    if (listId) await db.itemLists.add({ itemId, listId });
+    if (listId)
+      await db.itemLists.add({ id: crypto.randomUUID(), itemId, listId });
 
     await this.populateItems();
   }
 
-  async removeItem(id: number) {
+  async removeItem(id: string) {
     // resetting selected section if we remove the last item in a section
     // prevents user getting stuck in a selected section w/ no items
     if (this.selectedSection) {
@@ -204,7 +207,7 @@ class ItemManager {
     await this.populateItems();
   }
   /** Mark an item as 'in cart' //TODO: update from 'purchased' to 'in cart' */
-  async toggleItemPurchaseStatus(event: Event, id: number) {
+  async toggleItemPurchaseStatus(event: Event, id: string) {
     const target = event.target as HTMLInputElement;
     await db.items.update(id, { isPurchased: !!target.checked });
     await this.populateItems();

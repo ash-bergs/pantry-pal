@@ -23,15 +23,15 @@ export interface List {
 // join table for relationship (many to many) between item and list
 export interface ItemList {
   id?: string;
-  itemId: number;
-  listId: number;
+  itemId: string;
+  listId: string;
 }
 
 // class created to inform TS about our DB structure
 class PantryPalDatabase extends Dexie {
-  items!: Table<Item, number>;
-  lists!: Table<List, number>;
-  itemLists!: Table<ItemList, number>;
+  items!: Table<Item, string>;
+  lists!: Table<List, string>;
+  itemLists!: Table<ItemList, string>;
 
   constructor() {
     super('pantry-pal');
@@ -47,6 +47,14 @@ class PantryPalDatabase extends Dexie {
     this.version(3).stores({
       lists: '++id, name, isActive, createdAd, updatedAt',
       itemLists: '++id, itemId, listId',
+    });
+
+    // use unique string ids instead - &id syntax instead of auto-incrementing ++id
+    this.version(4).stores({
+      items:
+        '&id, name, price, isPurchased, section, quantityUnit, createdAt, updatedAt',
+      lists: '&id, name, isActive, createdAd, updatedAt',
+      itemLists: '&id, itemId, listId',
     });
   }
 }
@@ -123,42 +131,7 @@ const setInitPurchasedMiddleware = {
   },
 };
 
-/** Use Web Crypto API to set ID */
-const uuidMiddleware = {
-  stack: 'dbcore' as const,
-  name: 'uuidMiddleware',
-  create: (downlevelDBCore: DBCore): DBCore => {
-    return {
-      ...downlevelDBCore,
-      table: (tableName: string): DBCoreTable => {
-        const downlevelTable = downlevelDBCore.table(tableName);
-
-        return {
-          ...downlevelTable,
-          mutate: async (req: DBCoreMutateRequest) => {
-            if (
-              tableName === 'items' ||
-              tableName === 'lists' ||
-              tableName === 'itemLists'
-            ) {
-              if (req.type === 'add') {
-                req.values.forEach((item) => {
-                  if (!item.id) {
-                    item.id = crypto.randomUUID();
-                  }
-                });
-              }
-            }
-            return downlevelTable.mutate(req);
-          },
-        };
-      },
-    };
-  },
-};
-
 db.use(timestampsMiddleware);
 db.use(setInitPurchasedMiddleware);
-db.use(uuidMiddleware);
 
 export default db;

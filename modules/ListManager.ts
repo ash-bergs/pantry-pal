@@ -2,13 +2,13 @@ import db, { List } from './db';
 import { renderLists, noListMessage } from './domUtils';
 
 class ListManager {
-  selectedListId: number | null;
+  selectedListId: string | null;
 
   constructor() {
     this.selectedListId = null;
   }
 
-  setSelectedListId(id: number | null) {
+  setSelectedListId(id: string | null) {
     this.selectedListId = id;
   }
 
@@ -28,12 +28,15 @@ class ListManager {
   }
 
   async addList(name: string) {
-    console.log('calling add list');
-    await db.lists.add({ name });
+    const listId = crypto.randomUUID();
+    await db.lists.add({
+      id: listId,
+      name,
+    });
     await this.populateLists();
   }
 
-  async fetchList(id: number) {
+  async fetchList(id: string) {
     const list = await db.lists.where('id').equals(id).toArray();
     if (!list.length) return noListMessage();
   }
