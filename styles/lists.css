@@ -35,14 +35,14 @@
 
 .selectAllInputContainer label {
   display: flex;
-  align-items: center; /* Vertically center the checkbox and text */
+  align-items: center;
   font-size: 18px;
 }
 
 .selectAllInputContainer input[type='checkbox'] {
-  width: 20px; /* Adjust width */
-  height: 20px; /* Adjust height */
-  transform: scale(1.5); /* Scale it up */
-  margin-right: 1rem; /* Space between checkbox and label text */
+  width: 20px;
+  height: 20px;
+  transform: scale(1.5);
+  margin-right: 1rem;
   margin-left: 0.5rem;
 }
