@@ -35,7 +35,11 @@ if (currentListId) {
 
 window.toggleItemPurchaseStatus =
   itemManager.toggleItemPurchaseStatus.bind(itemManager);
+window.toggleAllItemsPurchaseStatus =
+  itemManager.toggleAllListItems.bind(itemManager);
 window.removeItem = itemManager.removeItem.bind(itemManager);
+window.removePurchasedItems =
+  itemManager.removePurchasedItems.bind(itemManager);
 window.populateItems = itemManager.populateItems.bind(itemManager);
 
 // get download button and add action
@@ -44,3 +48,5 @@ downloadButton?.addEventListener('click', exportDb);
 
 // call populate to load shopping list items
 window.onload = window.populateItems;
+
+//TODO: the itemMassActions div should not show up if there are no items

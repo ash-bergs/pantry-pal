@@ -22,3 +22,27 @@
 .listLink {
   text-decoration: none;
 }
+
+.itemMassActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--border-color);
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.selectAllInputContainer label {
+  display: flex;
+  align-items: center; /* Vertically center the checkbox and text */
+  font-size: 18px;
+}
+
+.selectAllInputContainer input[type='checkbox'] {
+  width: 20px; /* Adjust width */
+  height: 20px; /* Adjust height */
+  transform: scale(1.5); /* Scale it up */
+  margin-right: 1rem; /* Space between checkbox and label text */
+  margin-left: 0.5rem;
+}

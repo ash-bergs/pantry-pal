@@ -44,6 +44,25 @@
         </button>
       </div>
 
+      <!-- MASS ACTIONS -->
+      <div class="itemMassActions">
+        <div class="selectAllInputContainer">
+          <label>
+            <input
+              type="checkbox"
+              onChange="toggleAllItemsPurchaseStatus(event)"
+            />
+            Mark All Items Retrieved
+          </label>
+        </div>
+        <div class="itemMassActionsButtons">
+          <button class="cancelButton" onclick="removePurchasedItems()">
+            Delete All
+          </button>
+          <!-- <button class="altButton">Move to List</button> -->
+        </div>
+      </div>
+
       <!-- MODAL STRUCTURE -->
       <!-- ADD ITEM MODAL -->
       <div
@@ -119,6 +138,8 @@
       </div>
     </div>
 
+    <!-- TODO: DELETE CONFIRMATION MODAL -->
+
     <!-- FILTERS AND OPTIONS SIDEBAR -->
     <div
       id="optionsModal"
@@ -186,7 +207,7 @@
         </div>
 
         <div class="optionsModalFooter">
-          <button id="backupData" class="downloadDataButton">Download</button>
+          <button id="backupData" class="altButton">Download</button>
 
           <div class="uploadBackupArea">
             <form id="uploadBackupForm">

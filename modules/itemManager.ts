@@ -113,8 +113,6 @@ class ItemManager {
     if (!listId) return;
     const list = await db.lists.where('id').equals(listId).toArray();
 
-    console.log('fetch lists, list: ', list);
-
     if (!list.length) return noListMessage();
 
     // query the join tables for items data
@@ -212,6 +210,70 @@ class ItemManager {
     await db.items.update(id, { isPurchased: !!target.checked });
     await this.populateItems();
   }
+
+  /** Toggle all items in a list as 'in cart'/purchased/selected */
+  async toggleAllListItems(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const shouldMarkAll = target.checked;
+
+    const listId = this.currentListId;
+    if (!listId) return;
+    const list = await db.lists.where('id').equals(listId).toArray();
+
+    if (!list.length) return console.warn('No list with ID exists');
+    // get all the items, and mark them
+    const listItems = await db.itemLists
+      .where('listId')
+      .equals(listId)
+      .toArray();
+
+    const itemIds = listItems.map((item) => item.itemId);
+
+    // update all items
+    await db.items
+      .where('id')
+      .anyOf(itemIds)
+      .modify({ isPurchased: shouldMarkAll });
+
+    await this.populateItems();
+  }
+
+  /** Delete all items marked as purchased */
+  async removePurchasedItems() {
+    // same as usual - get the list, and the list items
+    //TODO: abstract this logic, since we do it in so many places
+    const listId = this.currentListId;
+    if (!listId) return;
+    const list = await db.lists.where('id').equals(listId).toArray();
+
+    if (!list.length) return console.warn('No list with ID exists');
+    // get all the items, and mark them
+    const listItems = await db.itemLists
+      .where('listId')
+      .equals(listId)
+      .toArray();
+
+    const itemIds = listItems.map((item) => item.itemId);
+
+    // Find items that are marked as purchased (isPurchased: true)
+    const purchasedItems = await db.items
+      .where('id')
+      .anyOf(itemIds)
+      .and((item) => item.isPurchased === true)
+      .toArray();
+
+    // Filter out any undefined or invalid ids - Type guard to ensure non-null string values
+    const purchasedItemIds = purchasedItems
+      .map((item) => item.id)
+      .filter((id): id is string => !!id);
+
+    // Remove purchased items
+    await db.items.where('id').anyOf(purchasedItemIds).delete();
+    // Clean up the join table
+    await db.itemLists.where('itemId').anyOf(purchasedItemIds).delete();
+    await this.populateItems();
+  }
+
   /** Sync indexdb content with uploaded JSON file */
   async syncUpload(file: File) {
     try {
