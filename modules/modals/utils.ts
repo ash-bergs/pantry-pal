@@ -49,7 +49,7 @@ export const useModal = ({
     });
   };
 
-  const showModal = (customShowModal?: () => void) => {
+  const showModal = (customShowModal: () => void = () => {}) => {
     if (!modal) return;
     modal.classList.add('open');
     modal.style.display = 'block';
@@ -58,17 +58,17 @@ export const useModal = ({
     modal.addEventListener('keydown', trapFocus);
     firstFocusableElement?.focus();
 
-    customShowModal && customShowModal();
+    customShowModal();
   };
 
-  const hideModal = (customHideModal?: () => void) => {
+  const hideModal = (customHideModal: () => void = () => {}) => {
     if (!modal) return;
     modal.classList.remove('open');
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
     setInert(false);
 
-    customHideModal && customHideModal();
+    customHideModal();
   };
 
   openModalButton?.addEventListener('click', () => showModal());
