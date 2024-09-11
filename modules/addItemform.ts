@@ -9,7 +9,7 @@ import {
   quantityUnitSelect,
   sectionSelect,
 } from './domElements';
-import { itemManager } from './itemManager';
+import itemManager from './ItemManager';
 import {
   storeSectionOptions,
   quantityUnitsOptions,

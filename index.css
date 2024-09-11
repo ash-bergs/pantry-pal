@@ -47,9 +47,9 @@ body {
 /* container for the add button and modal structure */
 .container {
   padding-top: 2rem;
-  padding-bottom: 2rem;
   padding-left: 6rem;
   padding-right: 6rem;
+  padding-bottom: 1rem;
   margin-top: 4rem; /* Gives space so the items in the main screen aren't behind the nav */
 }
 

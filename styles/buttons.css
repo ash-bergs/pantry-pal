@@ -54,8 +54,7 @@ button:active {
   font-size: 16px;
 }
 
-.downloadDataButton {
-  width: 100%;
+.altButton {
   color: #fff;
   background: #004385;
   box-shadow: var(--button-shadow), #023568 0 -12px 6px inset;

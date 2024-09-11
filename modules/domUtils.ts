@@ -5,7 +5,7 @@ import {
   stickyQuickSortFooter,
   quickSortDiv,
 } from './domElements';
-import { itemManager } from './itemManager';
+import itemManager from './ItemManager';
 
 export const renderItemsList = (items: Item[]) => {
   if (!itemsDiv) {
