@@ -13,9 +13,9 @@ import './domElements';
 import './domUtils';
 import './addItemform';
 import './uploadBackupForm';
-import './modal.js';
+import './modals/modal.js';
 import './optionsData.js';
-import './optionsModal';
+import './modals/options';
 import './modals/confirmDelete';
 
 // import itemManager from './ItemManager';

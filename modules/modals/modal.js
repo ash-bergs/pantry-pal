@@ -1,4 +1,4 @@
-import { addItemForm } from './domElements.ts';
+import { addItemForm } from '../domElements.ts';
 
 // get modal and focusable elements
 export const addModal = document.getElementById('modal');

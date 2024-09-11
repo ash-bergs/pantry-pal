@@ -3,7 +3,7 @@ import {
   hideChecked,
   sectionSort,
   uploadBackupForm,
-} from './domElements';
+} from '../domElements';
 
 // get modal and focusable elements
 export const modal = document.getElementById('optionsModal');

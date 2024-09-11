@@ -8,7 +8,7 @@ import '../styles/landing.css';
 import './db';
 import './domElements';
 import './domUtils';
-import './addListModal';
+import './modals/addList';
 import './addListForm';
 
 import { listManager } from './ListManager';
