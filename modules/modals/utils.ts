@@ -74,5 +74,19 @@ export const useModal = ({
   openModalButton?.addEventListener('click', () => showModal());
   closeModalButton.addEventListener('click', () => hideModal());
 
+  // Handle Escape key to close modal
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      hideModal();
+    }
+  });
+
+  // Handle clicks outside of the modal to close it
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      hideModal();
+    }
+  });
+
   return { showModal, hideModal };
 };

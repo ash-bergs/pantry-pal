@@ -20,18 +20,3 @@ confirmTrigger?.addEventListener('click', () => {
   itemManager.removePurchasedItems();
   confirmDeleteModalManager?.hideModal();
 });
-
-// Handle Escape key to close modal
-window.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    confirmDeleteModalManager?.hideModal();
-  }
-});
-
-// Handle clicks outside of the modal to close it
-window.addEventListener('click', (event) => {
-  const modal = document.getElementById('confirmDeleteModal');
-  if (event.target === modal) {
-    confirmDeleteModalManager?.hideModal();
-  }
-});
