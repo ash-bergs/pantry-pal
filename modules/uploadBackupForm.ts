@@ -1,5 +1,5 @@
 import { backupFileInput, uploadBackupForm } from './domElements';
-import { itemManager } from './itemManager';
+import itemManager from './ItemManager';
 import { hideOptionsModal } from './optionsModal';
 
 uploadBackupForm.onsubmit = async (event) => {

@@ -17,7 +17,8 @@ import './modal.js';
 import './optionsData.js';
 import './optionsModal';
 
-import { itemManager } from './itemManager';
+// import itemManager from './ItemManager';
+import itemManager from './ItemManager';
 import { listManager } from './ListManager';
 import { exportDb } from './exportDb';
 
