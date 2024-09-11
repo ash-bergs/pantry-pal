@@ -5,6 +5,10 @@ import {
   uploadBackupForm,
 } from '../domElements';
 
+//TODO: Brainstorm on this 'component' - it's not really a modal, but it's implemeneted as one
+// we're not using the `useModal` hook, so it doesn't necessarily make sense in this directory
+// research other sidebar implementations
+
 // get modal and focusable elements
 export const modal = document.getElementById('optionsModal');
 // create openOptionsModalButton
