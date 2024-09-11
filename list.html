@@ -56,7 +56,7 @@
           </label>
         </div>
         <div class="itemMassActionsButtons">
-          <button class="cancelButton" onclick="removePurchasedItems()">
+          <button class="cancelButton" id="openConfirmDeleteModal">
             Delete All
           </button>
           <!-- <button class="altButton">Move to List</button> -->
@@ -129,9 +129,7 @@
               <button type="submit" class="addButton" id="addItemButton">
                 Add Item
               </button>
-              <button id="cancelButton" class="cancelButton" type="button">
-                Cancel
-              </button>
+              <button id="cancelButton" class="cancelButton">Cancel</button>
             </div>
           </form>
         </div>
@@ -139,6 +137,38 @@
     </div>
 
     <!-- TODO: DELETE CONFIRMATION MODAL -->
+    <div
+      id="confirmDeleteModal"
+      class="modal"
+      role="dialog"
+      aria-labelledby="confirmDeleteModalTitle"
+      aria-modal="true"
+      aria-hidden="true"
+    >
+      <div class="modal-content">
+        <div>
+          <button id="closeConfirmDeleteModal" class="close" aria-label="Close">
+            &times;
+          </button>
+          <h2 id="confirmDeleteModalTitle">Confirm Item Deletion</h2>
+          <div class="confirmDeleteContent">
+            <h3>Are you sure?</h3>
+            <p>
+              This action will remove all items that are marked as purchased and
+              cannot be undone
+            </p>
+            <div class="confirmDeleteActions">
+              <button id="confirmDeleteAllButton" class="addButton">
+                Confirm
+              </button>
+              <button id="cancelDeleteAllButton" class="cancelButton">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- FILTERS AND OPTIONS SIDEBAR -->
     <div

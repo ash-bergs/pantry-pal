@@ -16,6 +16,7 @@ import './uploadBackupForm';
 import './modal.js';
 import './optionsData.js';
 import './optionsModal';
+import './modals/confirmDelete';
 
 // import itemManager from './ItemManager';
 import itemManager from './ItemManager';
@@ -39,8 +40,6 @@ window.toggleItemPurchaseStatus =
 window.toggleAllItemsPurchaseStatus =
   itemManager.toggleAllListItems.bind(itemManager);
 window.removeItem = itemManager.removeItem.bind(itemManager);
-window.removePurchasedItems =
-  itemManager.removePurchasedItems.bind(itemManager);
 window.populateItems = itemManager.populateItems.bind(itemManager);
 
 // get download button and add action
