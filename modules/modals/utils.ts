@@ -2,12 +2,14 @@ interface ModalConfig {
   modalId: string;
   openButtonId?: string;
   closeButtonId: string;
+  modalFormId?: string;
 }
 
 export const useModal = ({
   modalId,
   openButtonId,
   closeButtonId,
+  modalFormId,
 }: ModalConfig) => {
   const modal = document.getElementById(modalId);
   const openModalButton = openButtonId
@@ -21,6 +23,10 @@ export const useModal = ({
   const lastFocusableElement = focusableContent?.[
     focusableContent.length - 1
   ] as HTMLElement;
+  // form to reset, if applicable
+  const modalForm = modalFormId
+    ? (document.getElementById(modalFormId) as HTMLFormElement)
+    : null;
 
   if (!modal || !closeModalButton) {
     console.warn('Modal or modal buttons not found');
@@ -49,7 +55,7 @@ export const useModal = ({
     });
   };
 
-  const showModal = (customShowModal: () => void = () => {}) => {
+  const showModal = () => {
     if (!modal) return;
     modal.classList.add('open');
     modal.style.display = 'block';
@@ -57,18 +63,16 @@ export const useModal = ({
     setInert(true);
     modal.addEventListener('keydown', trapFocus);
     firstFocusableElement?.focus();
-
-    customShowModal();
   };
 
-  const hideModal = (customHideModal: () => void = () => {}) => {
+  const hideModal = () => {
     if (!modal) return;
     modal.classList.remove('open');
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
     setInert(false);
-
-    customHideModal();
+    // if there's a form, reset it
+    modalForm?.reset();
   };
 
   openModalButton?.addEventListener('click', () => showModal());
