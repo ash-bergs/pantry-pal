@@ -4,7 +4,6 @@ declare global {
     toggleItemPurchaseStatus: (event: Event, id: string) => Promise<void>;
     toggleAllItemsPurchaseStatus: (event: Event) => Promise<void>;
     removeItem: (id: string) => Promise<void>;
-    removePurchasedItems: () => Promise<void>;
     populateItems: () => Promise<void>;
     populateLists: () => Promise<void>;
   }

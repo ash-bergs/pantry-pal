@@ -18,14 +18,35 @@
   padding: 2rem;
   padding-bottom: 0.5rem;
   border: 1px solid #888;
-  width: 90%;
+  width: 50%;
   border-radius: 8px;
+}
+
+.confirmDeleteContent {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.confirmDeleteActions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+#confirmDeleteModalTitle {
+  font-family: var(--heading-font-family);
 }
 
 @media (max-width: 600px) {
   .modal-content,
   .addListModalContent {
     margin: 25% auto;
+    width: 90%;
   }
 }
 
@@ -54,7 +75,8 @@
 }
 
 #modalTitle,
-#addListModalTitle {
+#addListModalTitle,
+#confirmDeleteModalTitle {
   font-family: var(--heading-font-family);
   padding-top: 1rem;
   font-size: 24px;
