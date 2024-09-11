@@ -13,7 +13,7 @@ import './domElements';
 import './domUtils';
 import './addItemform';
 import './uploadBackupForm';
-import './modals/modal.js';
+import './modals/addItem';
 import './optionsData.js';
 import './modals/options';
 import './modals/confirmDelete';
