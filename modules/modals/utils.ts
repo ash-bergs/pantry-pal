@@ -1,10 +1,24 @@
 interface ModalConfig {
   modalId: string;
-  openButtonId?: string;
+  openButtonId: string;
   closeButtonId: string;
   modalFormId?: string;
 }
 
+/**
+ * useModal - a utility to manage the lifecycle of a modal
+ * Manages open/close, focus trapping, and resetting forms embedded in the modal through event listeners
+ * Automatically handles clicking outside the modal or pressing esc to close
+ *
+ * @param {Object} config - Config object for modal management
+ * @param {string} config.modalId - the ID of the modal parent
+ * @param {string} config.openButtonId - the ID of the UI element responsible for opening the modal
+ * @param {string} config.closeButtonId - the ID of the UI element responsible for closing the modal
+ * @param {string} [config.modalFormId] - Optional ID for a form element within the modal, used to clear/reset form when modal closes
+ *
+ * @returns {Object} - an object containing 2 methods (showModal and hideModal)
+ * useful for programmatically toggling the modals elsewhere
+ */
 export const useModal = ({
   modalId,
   openButtonId,
@@ -12,9 +26,7 @@ export const useModal = ({
   modalFormId,
 }: ModalConfig) => {
   const modal = document.getElementById(modalId);
-  const openModalButton = openButtonId
-    ? document.getElementById(openButtonId)
-    : null;
+  const openModalButton = document.getElementById(openButtonId);
   const closeModalButton = document.getElementById(closeButtonId);
   const focusableElements =
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
