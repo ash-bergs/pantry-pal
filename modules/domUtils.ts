@@ -1,10 +1,12 @@
 import { Item, List } from './db';
 import {
+  addItemForm,
   itemsDiv,
   listsDiv,
   stickyQuickSortFooter,
   quickSortDiv,
 } from './domElements';
+import { openEditModal } from './addItemform';
 import itemManager from './ItemManager';
 
 export const renderItemsList = (items: Item[]) => {
@@ -55,6 +57,7 @@ export const renderItemsList = (items: Item[]) => {
         <button
         class="editButton"
         aria-label="Edit ${item.name}"
+        data-item-id="${item.id}"
         >
         Edit
         </button>
@@ -64,6 +67,31 @@ export const renderItemsList = (items: Item[]) => {
     `
     )
     .join('');
+
+  document.querySelectorAll('.editButton').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const target = event.target as HTMLElement; // Typecast to HTMLElement
+      const itemId = target.getAttribute('data-item-id');
+
+      const item = items.find((item) => item.id === itemId);
+      console.log(item);
+      if (!item) return console.warn('No item found');
+      if (!addItemForm) return console.warn('No add item form element');
+
+      // DEBUG: Whenever i call something from addItemForm in here I get:
+      // addItemform.ts:44 Uncaught TypeError: Cannot set properties of null (setting 'onsubmit')
+      // order of import thing? race condition? how to handle? IDFK, that's tomorrow Ash's problem
+
+      // openEditModal(item);
+      // if (itemId) {
+      //   const item = items.find((i) => i.id === itemId); // Find the item by id
+      //   if (item) {
+      //     openEditModal(item); // Pass the item to the edit modal
+      //   }
+      // }
+    });
+  });
 };
 
 export const renderSectionBubbles = (
@@ -105,6 +133,7 @@ export const renderSectionBubbles = (
 const handleSectionClick = (event: Event, section: string) => {
   event.preventDefault();
   itemManager.filterBySection(section);
+  itemManager.populateItems();
 };
 
 window.handleSectionClick = handleSectionClick;

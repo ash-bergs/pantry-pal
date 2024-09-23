@@ -10,6 +10,17 @@ class DatabaseService {
     }
   }
 
+  //? Should this take a list id and update that as well? The ITEM and items table is not concerned with a list id so I'm gonna say no for now
+  async editItem(item: Item) {
+    const itemId = item.id;
+    if (!itemId) return console.warn('This item is missing an id');
+    const dbItem = await db.items.where('id').equals(itemId);
+    if (!dbItem)
+      return console.warn('No item with this id exists in the items table');
+
+    await db.items.update(itemId, item);
+  }
+
   async removeItem(id: string) {
     await db.items.delete(id);
     await db.itemLists.where('itemId').equals(id).delete();

@@ -1,3 +1,5 @@
+import { Item } from 'modules/db';
+
 declare global {
   interface Window {
     handleSectionClick: (event: Event, section: any) => void;
@@ -6,6 +8,7 @@ declare global {
     removeItem: (id: string) => Promise<void>;
     populateItems: () => Promise<void>;
     populateLists: () => Promise<void>;
+    openEditModal: (item: Item) => void;
   }
 }
 

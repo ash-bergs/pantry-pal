@@ -11,14 +11,13 @@ import '../styles/landing.css';
 import './db';
 import './domElements';
 import './domUtils';
-import './addItemform';
 import './uploadBackupForm';
 import './modals/addItem';
+import './addItemform';
 import './optionsData.js';
 import './modals/options';
 import './modals/confirmDelete';
 
-// import itemManager from './ItemManager';
 import itemManager from './ItemManager';
 import { listManager } from './ListManager';
 import { exportDb } from './exportDb';

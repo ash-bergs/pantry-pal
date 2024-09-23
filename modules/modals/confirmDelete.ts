@@ -18,5 +18,6 @@ cancelTrigger?.addEventListener('click', () => {
 
 confirmTrigger?.addEventListener('click', () => {
   itemManager.removePurchasedItems();
+  itemManager.populateItems();
   confirmDeleteModalManager?.hideModal();
 });
