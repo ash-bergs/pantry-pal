@@ -14,6 +14,7 @@ uploadBackupForm.onsubmit = async (event) => {
     try {
       await itemManager.syncUpload(file);
       alert('Upload complete!');
+      await itemManager.populateItems();
     } catch (err) {
       console.error('Error uploading file:', err);
       alert('There was a problem uploading your file, please try again');

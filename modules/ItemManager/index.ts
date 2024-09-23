@@ -44,7 +44,6 @@ class ItemManager {
   /** applies or clears the selected store section */
   filterBySection = (section: string | null) => {
     this.setSelectedSection(this.selectedSection === section ? null : section);
-    this.populateItems();
   };
 
   /** Populate items in a specific list */
@@ -102,6 +101,13 @@ class ItemManager {
     await this.populateItems();
   }
 
+  async editItem(item: Item) {
+    // this is redundant
+    await databaseService.editItem(item);
+    // adding on to the problem of not calling populate items like this - it's confusing
+    await this.populateItems();
+  }
+
   async removeItem(id: string) {
     // resetting selected section if we remove the last item in a section
     // prevents user getting stuck in a selected section w/ no items
@@ -128,7 +134,6 @@ class ItemManager {
   /** Mark an item as 'in cart' //TODO: update from 'purchased' to 'in cart' */
   async toggleItemPurchaseStatus(event: Event, id: string) {
     const target = event.target as HTMLInputElement;
-    // await db.items.update(id, { isPurchased: !!target.checked });
     await databaseService.toggleItemPurchaseStatus(id, !!target.checked);
     await this.populateItems();
   }
@@ -168,7 +173,6 @@ class ItemManager {
 
     if (!list.length) return console.warn('No list with ID exists');
     await databaseService.removePurchasedItems(listId);
-    await this.populateItems();
   }
 
   /** Sync indexdb content with uploaded JSON file */
@@ -178,16 +182,12 @@ class ItemManager {
       const items: Item[] = JSON.parse(text);
       console.log('upload items: ', items);
 
-      // add items in parallel, skip dupes
+      // add items in parallel
       await Promise.all(
         items.map(async (item) => {
-          if (!item.id) return; // these should always have ids
-          const existingItem = await db.items.get(item.id);
-          if (!existingItem) await db.items.add(item);
+          await databaseService.addItem({ ...item }, this.currentListId);
         })
       );
-
-      await this.populateItems();
     } catch (err) {
       console.error('Error syncing saved list:', err);
     }

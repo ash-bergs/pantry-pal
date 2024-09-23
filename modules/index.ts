@@ -10,17 +10,7 @@ import './domElements';
 import './domUtils';
 import './modals/addList';
 import './addListForm';
-
 import { listManager } from './ListManager';
 
-// window.toggleItemPurchaseStatus =
-//   itemManager.toggleItemPurchaseStatus.bind(itemManager);
-// window.removeItem = itemManager.removeItem.bind(itemManager);
-// window.populateItems = itemManager.populateItems.bind(itemManager);
 window.populateLists = listManager.populateLists.bind(listManager);
-
-// get download button and add action
-// const downloadButton = document.getElementById('backupData');
-// downloadButton?.addEventListener('click', exportDb);
-
 window.onload = window.populateLists;

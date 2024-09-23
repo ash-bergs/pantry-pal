@@ -3,8 +3,6 @@ import {
   clearFormButton,
   nameInput,
   nameError,
-  // priceInput,
-  // priceError,
   quantityInput,
   quantityUnitSelect,
   sectionSelect,
@@ -15,16 +13,12 @@ import {
   quantityUnitsOptions,
   createOptions,
 } from './optionsData.js';
-
-// get the URL search param -> ?=LIST_ID
-const urlSearchParams = new URLSearchParams(window.location.search);
-const currentListId = urlSearchParams.get('id');
+import { Item } from './db';
 
 export const clearForm = () => {
   clearNameErrors();
-  // clearPriceErrors();
   addItemForm.reset();
-  nameInput?.focus(); // return focus to the top form input
+  nameInput?.focus();
 };
 
 export const clearNameErrors = () => {
@@ -32,12 +26,6 @@ export const clearNameErrors = () => {
   if (!nameError) return;
   nameError.textContent = '';
 };
-
-// export const clearPriceErrors = () => {
-//   priceInput.setCustomValidity('');
-//   if (!priceError) return;
-//   priceError.textContent = '';
-// };
 
 // generate the options in section and quantity unit selects
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,17 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// State to track if we're adding or editing an item
+let isEditing = false;
+let currentItemId: string | null = null;
+
 addItemForm.onsubmit = async (event) => {
   event.preventDefault();
 
-  if (
-    !nameInput ||
-    !nameError ||
-    // !priceInput ||
-    // !priceError ||
-    !sectionSelect ||
-    !quantityUnitSelect
-  ) {
+  if (!nameInput || !nameError || !sectionSelect || !quantityUnitSelect) {
     console.error('Missing required DOM elements');
     return;
   }
@@ -71,11 +56,6 @@ addItemForm.onsubmit = async (event) => {
     nameError.textContent = nameInput.validationMessage;
     valid = false;
   }
-  // if (!priceInput.validity.valid) {
-  //   priceInput.setCustomValidity('Please enter a valid price (e.g. $1.99)');
-  //   priceError.textContent = priceInput.validationMessage;
-  //   valid = false;
-  // }
 
   if (!valid) return;
 
@@ -85,18 +65,58 @@ addItemForm.onsubmit = async (event) => {
   const price = 0; // TODO PRICE
   const section = sectionSelect.value;
 
-  await itemManager.addItem(
-    name,
-    Number(quantity),
-    quantityUnit,
-    Number(price),
-    section
-  );
+  if (isEditing && currentItemId) {
+    // in edit mode, update item
+    await itemManager.editItem({
+      id: currentItemId,
+      name,
+      quantity: Number(quantity),
+      quantityUnit,
+      price: Number(price),
+      section,
+    });
+    isEditing = false;
+    currentItemId = null;
+    // close the modal
+    // addItemModalManager?.hideModal();
+  } else {
+    // add item
+    await itemManager.addItem(
+      name,
+      Number(quantity),
+      quantityUnit,
+      Number(price),
+      section
+    );
+  }
 
   addItemForm?.reset();
   nameInput?.focus();
 };
 
+// helper to pre-populate the form
+const populateForm = (item: Item) => {
+  if (!item) return;
+
+  nameInput.value = item.name || '';
+  quantityInput.value = String(item.quantity) || '1';
+  quantityUnitSelect.value = item.quantityUnit || '';
+  sectionSelect.value = item.section || '';
+
+  nameInput.focus();
+};
+
+// function to open the modal for editing
+export const openEditModal = (item: Item) => {
+  console.log('Open edit modal');
+  // addItemModalManager?.showModal();
+  // isEditing = true;
+  // if (!item.id) return;
+  // currentItemId = item.id;
+  // populateForm(item);
+};
+
 clearFormButton?.addEventListener('click', clearForm);
 nameInput?.addEventListener('input', clearNameErrors);
-// priceInput?.addEventListener('input', clearPriceErrors);
+
+window.openEditModal = openEditModal;
